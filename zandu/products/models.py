@@ -58,6 +58,8 @@ class Product(models.Model):
     updated=models.DateTimeField(auto_now=True)
     on_sale=models.BooleanField(default=False)
 
+    class Meta:
+        ordering=('-created',)
 
     def __str__(self):
         return f"{self.title} uploaded by {self.uploader}"

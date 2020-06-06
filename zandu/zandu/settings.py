@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',#for allauth
+
+    'allauth',
+    'allauth.account',
 
     'accounts.apps.AccountsConfig',
     'cart.apps.CartConfig',
@@ -45,6 +49,15 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'shops.apps.ShopsConfig',
 ]
+
+SITE_ID=1 #because of allauth
+
+AUTHENTICATION_BACKENDS=(
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)#because of allauth
+
+EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'#allauth
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
