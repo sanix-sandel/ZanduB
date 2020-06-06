@@ -27,10 +27,11 @@ class Product(models.Model):
                                 null=False,
                                 related_name='products',
                                 on_delete=models.CASCADE)
-                                
+
     owner_id=models.PositiveIntegerField(null=False, blank=False,
                                         db_index=True)
 
+    owner=GenericForeignKey('owner_ct', 'owner_id')                                    
     title=models.CharField(max_length=100)
 
     category=models.ForeignKey(Category, related_name='product',
