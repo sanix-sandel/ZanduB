@@ -14,6 +14,8 @@ class User(AbstractBaseUser):
         unique=True,
     )
     profile_image=models.ImageField(upload_to='profile_pics/', blank=True)
+    product=GenericRelation("products.Product")
+    shop=GenericRelation("shops.Shop")
     #notif
     #groupe
     #location
