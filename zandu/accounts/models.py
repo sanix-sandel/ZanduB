@@ -1,9 +1,9 @@
 from django.db import models
-from django.contrib.auth.models AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth import get_user_model
-from managers import UserManager
+from .managers import UserManager
 from django.conf import settings
-from django.contrib.contentTypes.fields import GenericRelation
+from django.contrib.contenttypes.fields import GenericRelation
 
 
 class User(AbstractBaseUser):
@@ -15,13 +15,13 @@ class User(AbstractBaseUser):
     )
     profile_image=models.ImageField(upload_to='profile_pics/', blank=True)
     product=GenericRelation("products.Product")
-    shop=GenericRelation("shops.Shop")
+    store=GenericRelation("shops.Store")
     #notif
     #groupe
     #location
     is_active=models.BooleanField(default=True)
     is_admin=models.BooleanField(default=False)
-    reports=PositiveIntegerField()#for supspicious activity
+    reports=models.PositiveIntegerField()#for supspicious activity
 
     objects=UserManager()
 

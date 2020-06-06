@@ -11,10 +11,10 @@ class Store(models.Model):
                                 null=False,
                                 related_name='own_store',
                                 on_delete=models.CASCADE)
-    owner_id=models.PositiveIntgerField(null=False, blank=False,
+    owner_id=models.PositiveIntegerField(null=False, blank=False,
                                         db_index=True)
 
-    owner=GenericForeignKey('owner_ct', 'owner_id')                                                                
+    owner=GenericForeignKey('owner_ct', 'owner_id')
 
 
     image=models.ImageField(upload_to='store_pics/', blank=True)
@@ -26,7 +26,7 @@ class Store(models.Model):
                                     blank=True)
     rate=models.PositiveIntegerField()
     address=models.TextField()
-    date_created=models.DateTimeField(auto_add_now=True)
+    date_created=models.DateTimeField(auto_now_add=True)
 
 #followers
 
@@ -37,7 +37,7 @@ class Store(models.Model):
 class Post(models.Model):
     content=models.TextField()
     author=models.ForeignKey(Store, related_name='post', on_delete=models.CASCADE)
-    date_uploaded=models.DateTimeField(auto_add_now=True)
+    date_uploaded=models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"post belonging to {store}"

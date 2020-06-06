@@ -7,7 +7,7 @@ class Order(models.Model):
                                 related_name='order',
                                 on_delete=models.CASCADE)
 
-    created=models.DateTimeField(auto_add_now=True)
+    created=models.DateTimeField(auto_now_add=True)
     updated=models.BooleanField(default=False)
     paid=models.BooleanField(default=False)
 
@@ -27,7 +27,7 @@ class OrderItem(models.Model):
                             on_delete=models.CASCADE)
     product=models.ForeignKey(Product, related_name='order_items',
                             on_delete=models.CASCADE)
-    price=models.DeciamlField(max_digits=10, decimal_places=2)
+    price=models.DecimalField(max_digits=10, decimal_places=2)
     quantity=models.PositiveIntegerField(default=1)
 
     def __str__(self):

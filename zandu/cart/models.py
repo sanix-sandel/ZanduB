@@ -1,4 +1,4 @@
-from deciaml import Decimal
+from decimal import Decimal
 from django.conf import settings
 from django.db import models
 
@@ -63,3 +63,7 @@ class Cart(object):
         return sum(Decimal(item['price'])*item['quantity'] for item
                         in self.cart.values()
                     )
+
+    def clear(self):
+        del self.session[settings.CART_SESSION_ID]
+        self.save()

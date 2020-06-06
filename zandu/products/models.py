@@ -31,11 +31,11 @@ class Product(models.Model):
     owner_id=models.PositiveIntegerField(null=False, blank=False,
                                         db_index=True)
 
-    owner=GenericForeignKey('owner_ct', 'owner_id')                                    
+    owner=GenericForeignKey('owner_ct', 'owner_id')
     title=models.CharField(max_length=100)
 
     category=models.ForeignKey(Category, related_name='product',
-                                on_delete=models.CASACDE)
+                                on_delete=models.CASCADE)
     description=models.TextField()
     price=models.DecimalField(max_digits=10, decimal_places=2)
     likes=models.ManyToManyField(settings.AUTH_USER_MODEL,
@@ -63,7 +63,7 @@ class ProductImage(models.Model):
 
 
 class ProductComment(models.Model):
-    content=CharField(max_length=300)
-    author=models.ForeignKey(setiings.AUTH_USER_MODEL,
+    content=models.CharField(max_length=300)
+    author=models.ForeignKey(settings.AUTH_USER_MODEL,
                             related_name='comment', on_delete=models.CASCADE)
-    date_posted=models.DateTimeField(auto_add_now=True)
+    date_posted=models.DateTimeField(auto_now_add=True)
