@@ -10,6 +10,7 @@ class Store(models.Model):
     title=models.CharField(max_length=50)
     slogan=models.TextField()
     about=models.TextField()
+    rate=models.PositiveIntegerField()
     address=models.TextField()
     date_created=models.DateTimeField(auto_add_now=True)
 #followers
