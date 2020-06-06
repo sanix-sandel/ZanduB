@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import (
@@ -6,7 +7,13 @@ from django.contrib.contenttypes.fields import (
     GenericRelation
 )
 
+
 class Store(models.Model):
+    id=models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
     owner_ct=models.ForeignKey(ContentType, blank=False,
                                 null=False,
                                 related_name='own_store',

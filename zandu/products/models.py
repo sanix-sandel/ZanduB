@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import (
@@ -8,6 +9,12 @@ from django.contrib.contenttypes.fields import (
 
 
 class Category(models.Model):
+    id=models.UUIDField(
+            primary_key=True,
+            default=uuid.uuid4,
+            editable=False
+    )
+
     name=models.CharField(max_length=200,
                             db_index=True)
     logo=models.ImageField(upload_to='categories_pics/', blank=True)
@@ -23,6 +30,11 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    id=models.UUIDField(
+            primary_key=True,
+            default=uuid.uuid4,
+            editable=False
+    )
     owner_ct=models.ForeignKey(ContentType, blank=False,
                                 null=False,
                                 related_name='products',
@@ -53,6 +65,11 @@ class Product(models.Model):
 
 
 class ProductImage(models.Model):
+    id=models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
     product=models.ForeignKey(Product, related_name='image',
                                 on_delete=models.CASCADE)
     image=models.ImageField(upload_to='products_pics/', blank=True)
@@ -63,6 +80,11 @@ class ProductImage(models.Model):
 
 
 class ProductComment(models.Model):
+    id=models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
     content=models.CharField(max_length=300)
     author=models.ForeignKey(settings.AUTH_USER_MODEL,
                             related_name='comment', on_delete=models.CASCADE)
