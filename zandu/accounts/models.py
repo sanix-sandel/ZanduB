@@ -22,6 +22,7 @@ class User(AbstractBaseUser):
         unique=True,
     )
     profile_image=models.ImageField(upload_to='profile_pics/', blank=True)
+    #phone
     product=GenericRelation("products.Product")
     store=GenericRelation("shops.Store")
     #notif
