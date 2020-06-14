@@ -59,7 +59,7 @@ class Product(models.Model):
     on_sale=models.BooleanField(default=False)
 
     class Meta:
-        ordering=('-created',)
+        ordering=('-date_posted',)
 
     def __str__(self):
         return f"{self.title} uploaded by {self.uploader}"
