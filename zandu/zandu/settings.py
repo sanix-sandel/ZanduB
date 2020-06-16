@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -42,6 +45,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
 
+    'core.apps.CoreConfig',
     'accounts.apps.AccountsConfig',
     'cart.apps.CartConfig',
     'groups.apps.GroupsConfig',
@@ -74,7 +78,7 @@ ROOT_URLCONF = 'zandu.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -137,4 +141,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+#For versioning
+from core.versioning import get_git_changeset_timestamp
+
+
+timestamp = get_git_changeset_timestamp(BASE_DIR)
+STATIC_URL = f'/static/{timestamp}/'
+
+STATICFILES_DIRS=[os.path.join(BASE_DIR, 'static'),]
+STATIC_ROOT=os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_FINDERS=[
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
+MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
+MEDIA_URL='/media/'

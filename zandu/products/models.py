@@ -40,17 +40,20 @@ class Product(models.Model):
                                 related_name='products',
                                 on_delete=models.CASCADE)
 
-    owner_id=models.PositiveIntegerField(null=False, blank=False,
+    owner_id=models.UUIDField(null=False, blank=False,
                                         db_index=True)
 
     owner=GenericForeignKey('owner_ct', 'owner_id')
     title=models.CharField(max_length=100)
-
+    font_image=models.ImageField(upload_to='font_images/',
+                                blank=False,
+                                null=False)
     category=models.ForeignKey(Category, related_name='product',
                                 on_delete=models.CASCADE)
     description=models.TextField()
     price=models.DecimalField(max_digits=10, decimal_places=2)
     likes=models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                blank=True,
                                 related_name='products_liked')
     views=models.PositiveIntegerField(default=0)
     available=models.BooleanField(default=True)
@@ -62,7 +65,7 @@ class Product(models.Model):
         ordering=('-date_posted',)
 
     def __str__(self):
-        return f"{self.title} uploaded by {self.uploader}"
+        return f"{self.title} uploaded by {self.owner}"
 
 
 
@@ -77,7 +80,7 @@ class ProductImage(models.Model):
     image=models.ImageField(upload_to='products_pics/', blank=True)
 
     def __str__(self):
-        return f"image beloging of{self.product}"
+        return f"image belonging to {self.product}"
 
 
 
