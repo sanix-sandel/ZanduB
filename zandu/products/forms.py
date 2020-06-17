@@ -1,21 +1,17 @@
 from django import forms
 from .models import Product, Category
+from django.shortcuts import get_object_or_404
 
 class ProductForm(forms.ModelForm):
-    category=forms.ModelMultipleChoiceField(
-        label=('categries'),
-        queryset=Category.objects.all(),
 
-    )
     class Meta:
         model=Product
-        fields=('title', 'font_image', 'price', 'description')
+
+        fields=('title', 'font_image', 'category', 'price', 'description')
 
     def save(self, commit=True):
         product=super().save(commit=False)
-        category=self.cleaned_data['category']
         title=self.cleaned_data['title']
-        font_image=self.cleaned_data['font_image']
         price=self.cleaned_data['price']
         description=self.cleaned_data['description']
         if commit:

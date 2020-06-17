@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import (
     ListView,
     DetailView,
@@ -10,16 +10,31 @@ from .models import Product, Category
 from .forms import ProductForm
 from django.urls import reverse_lazy
 
-class Sell(CreateView):
-    form_class=ProductForm
-    success_url=reverse_lazy('home')
-    template_name='products/sell.html'
+#class Sell(CreateView):
+#    model=Product
+#    fields=['title', 'price', 'category', 'description']
+#    success_url=reverse_lazy('home')
+#    template_name='products/sell.html'
 
-    def form_valid(self, form):
-        product=super().form_valid(form)
-        product.owner=self.request.user
-        product.save()
+#    def form_valid(self, form):
+#        form.instance.owner=self.request.user
+#        return super().form_valid(form)
 
+
+def Sell(request):
+    if request.method=='POST':
+        form=ProductForm(data=request.POST,
+                        files=request.FILES)
+        if form.is_valid():
+            product=form.save(commit=False)
+            product.owner=request.user
+            product.save()
+            return redirect('home')
+        else:
+            return redirect('stores')
+    else:
+        form=ProductForm()
+    return render(request, 'products/sell.html', {'form':form})
 
 
 def Home(request):

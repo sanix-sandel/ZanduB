@@ -45,7 +45,7 @@ class Product(models.Model):
 
     owner=GenericForeignKey('owner_ct', 'owner_id')
     title=models.CharField(max_length=100)
-    font_image=models.ImageField(upload_to='font_images/',
+    font_image=models.ImageField(default='font_images/default.jpg', upload_to='font_images/',
                                 blank=False,
                                 null=False)
     category=models.ForeignKey(Category, related_name='product',
