@@ -21,8 +21,10 @@ def Home(request):
 
 def category(request, id):
     category=get_object_or_404(Category, id=id)
+    categories=Category.objects.all()
     products=Product.objects.filter(category=category)
     context={
+        'categories':categories,
         'category':category,
         'products':products
     }

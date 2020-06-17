@@ -4,11 +4,11 @@
 
 <div class="container">
   <br>
-  <h4>Bootstrap 4 and CCS3 Product Cards with Transition - Techhowdy(demonguru18) - Lyoid Lopes</h4>
+  <h4>ZanduB Store</h4>
 <br>
 <div class="row" id="ads">
   <!-- Category Card -->
-  {% for product in products %}
+  {% for store in stores %}
   <div class="col-md-4">
       <div class="card rounded">
           <div class="card-image">
@@ -18,14 +18,15 @@
           </div>
           <div class="card-image-overlay m-auto">
               <!--<span class="card-detail-badge">Used</span>-->
-              <span class="card-detail-badge">{{product.price}} F CFA</span>
+            
+              <span class="card-detail-badge">{{store.slogan}}</span>
               <!--<span class="card-detail-badge">13000 Kms</span>-->
           </div>
           <div class="card-body text-center">
               <div class="ad-title m-auto">
-                  <h5>{{product.title}}</h5>
+                <h5>{{store.title}}</h5>
               </div>
-              <a class="ad-btn" href="#">View</a>
+              <a class="ad-btn" href="{% url 'view_store' id=store.id %}">View</a>
           </div>
       </div>
   </div>

@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'groups.apps.GroupsConfig',
     'orders.apps.OrdersConfig',
     'products.apps.ProductsConfig',
-    'shops.apps.ShopsConfig',
+    'stores.apps.StoresConfig',
 ]
 
 SITE_ID=1 #because of allauth
@@ -86,6 +86,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+            #    'products.context_processors.categories',
+
             ],
         },
     },
