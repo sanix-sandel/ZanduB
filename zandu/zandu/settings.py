@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'allauth',
     'allauth.account',
+    'crispy_forms',
 
     'core.apps.CoreConfig',
     'accounts.apps.AccountsConfig',
@@ -161,3 +162,5 @@ STATICFILES_FINDERS=[
 
 MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
 MEDIA_URL='/media/'
+
+CRISPY_TEMPLATE_PACK='bootstrap4'

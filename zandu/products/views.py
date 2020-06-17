@@ -7,6 +7,19 @@ from django.views.generic import (
     UpdateView
 )
 from .models import Product, Category
+from .forms import ProductForm
+from django.urls import reverse_lazy
+
+class Sell(CreateView):
+    form_class=ProductForm
+    success_url=reverse_lazy('home')
+    template_name='products/sell.html'
+
+    def form_valid(self, form):
+        product=super().form_valid(form)
+        product.owner=self.request.user
+        product.save()
+
 
 
 def Home(request):
@@ -35,7 +48,7 @@ def ProductView(request, id):
 
 
     context={
-        
+
         'product':product
     }
     return render(request, 'products/product.html', context)
