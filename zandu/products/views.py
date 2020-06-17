@@ -11,10 +11,10 @@ from .models import Product, Category
 
 def Home(request):
     products=Product.objects.all()
-    categories=Category.objects.all()
+
     context={
         'products':products,
-        'categories':categories
+
     }
     return render(request, 'products/home.html', context)
 
@@ -29,3 +29,13 @@ def category(request, id):
         'products':products
     }
     return render(request, 'products/bycategories.html', context)
+
+def ProductView(request, id):
+    product=get_object_or_404(Product, id=id)
+
+
+    context={
+        
+        'product':product
+    }
+    return render(request, 'products/product.html', context)

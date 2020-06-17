@@ -32,7 +32,7 @@ class Store(models.Model):
                                     related_name='stores_followed',
                                     blank=True)
     rate=models.PositiveIntegerField(default=0)
-    product=GenericRelation("stores.Store", content_type_field='owner_ct',
+    products=GenericRelation("products.Product", content_type_field='owner_ct',
                             object_id_field='owner_id',
                             related_query_name='products')
     address=models.TextField()
