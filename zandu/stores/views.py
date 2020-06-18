@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Store
+from django.urls import reverse_lazy
+from .models import Store, Post
 from products.models import Category, Product
 from django.views.generic import(
     ListView,
@@ -59,6 +60,13 @@ def AddProduct(request, store_id):
         form=ProductForm()
     return render(request, 'stores/add_product.html',
                     {'form':form, 'store':store})
+
+class MakePost(CreateView):
+    model=Post
+    fields=('content',)
+    template_name='stores/create_post.html'
+    success_url=reverse_lazy('home')
+
 
 
 #follow a store
