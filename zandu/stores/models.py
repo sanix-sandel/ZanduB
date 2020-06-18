@@ -8,6 +8,7 @@ from django.contrib.contenttypes.fields import (
 )
 
 
+
 class Store(models.Model):
     id=models.UUIDField(
         primary_key=True,
@@ -35,7 +36,7 @@ class Store(models.Model):
     products=GenericRelation("products.Product", content_type_field='owner_ct',
                             object_id_field='owner_id',
                             related_query_name='products')
-    address=models.TextField()
+    address=models.CharField(max_length=150)#CharField
     date_created=models.DateTimeField(auto_now_add=True)
 
 #followers
@@ -51,3 +52,14 @@ class Post(models.Model):
 
     def __str__(self):
         return f"post belonging to {store}"
+
+
+#Store and followers
+class Contact(models.Model):
+    user=models.ForeignKey(settings.AUTH_USER_MODEL,
+                           related_name='rel_from_set',
+                           on_delete=models.CASCADE)
+    store=models.ForeignKey(Store,
+                            related_name='rel_to_set',
+                            on_delete=models.CASCADE)
+    created=models.DateTimeField(auto_now_add=True)

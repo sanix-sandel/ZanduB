@@ -1,15 +1,36 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Store
 from products.models import Category, Product
+from django.views.generic import(
+    ListView,
+    DetailView,
+    CreateView,
+    DeleteView,
+    UpdateView
+)
+from .forms import StoreForm
 
-def StoresList(request):
-    stores=Store.objects.all()
 
-    context={
-        'stores':stores,
 
-    }
-    return render(request, 'stores/stores.html', context)
+class StoresList(ListView):
+    model=Store
+    context_object_name='stores'
+    template_name='stores/stores.html'
+
+
+def CreateStore(request):
+    if request.method=='POST':
+        form=StoreForm(request.POST, request.FILES)
+        if form.is_valid():
+            store=form.save(commit=False)
+            store.owner=request.user
+            store.save()
+            return redirect('view_store', id=store.id)
+    else:
+        form=StoreForm()
+    return render(request, 'stores/create_store.html',
+                            {'form':form})
+
 
 
 def StoreView(request, id):
@@ -19,6 +40,8 @@ def StoreView(request, id):
     context={
         'products':products,
         'store':store,
-    
+
     }
     return render(request, 'stores/store.html', context)
+
+#follow a store

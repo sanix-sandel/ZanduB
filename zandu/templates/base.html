@@ -28,7 +28,7 @@
    <nav id="sidebar" class="sidebar-wrapper">
      <div class="sidebar-content">
        <div class="sidebar-brand">
-         <a href="#"><p>ZanduB</p></a>
+         <a href="{% url 'home' %}"><p>ZanduB</p></a>
          <div id="close-sidebar">
            <i class="fas fa-times"></i>
          </div>
@@ -102,7 +102,7 @@
             <div class="sidebar-submenu">
               <ul>
                 <li>
-                  <a href="#">Creer ma Store
+                  <a href="{% url 'create_store' %}">Creer ma Store
 
                   </a>
                 </li>
@@ -137,8 +137,8 @@
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
-              <i class="fa fa-chart-line"></i>
-              <span>Charts</span>
+              <i class="fa fa-heart"></i>
+              <span>Articles aimes</span>
             </a>
             <div class="sidebar-submenu">
               <ul>
