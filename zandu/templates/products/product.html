@@ -13,7 +13,9 @@
       <div class="card rounded">
           <div class="card-image">
               <span class="card-notify-badge">Low KMS</span>
-              <span class="card-notify-year">2018</span>
+              <span class="card-notify-year">
+                {{product.get_onsale}}
+              </span>
               <img class="img-fluid" src="{{product.font_image.url}}" alt="Alternate Text" />
           </div>
           <div class="card-image-overlay m-auto">
@@ -25,7 +27,16 @@
               <div class="ad-title m-auto">
                   <h5>{{product.title}}</h5>
               </div>
-              <a class="ad-btn" href="#">View</a>
+              <div class="ad-title m-auto">
+                  <h5>{{product.date_posted}}</h5>
+              </div>
+              <div class="ad-title m-auto">
+                  <h5>{{product.updated}}</h5>
+              </div>
+              <div class="ad-title m-auto">
+                  <h5>{{product.on_sale}}</h5>
+              </div>
+              <a class="ad-btn" href="{% url 'update_product' product.pk %}">View</a>
           </div>
       </div>
   </div>

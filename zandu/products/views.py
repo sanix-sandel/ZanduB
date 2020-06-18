@@ -20,7 +20,11 @@ class Sell(CreateView):
         form.instance.owner=self.request.user
         return super().form_valid(form)
 
-
+class UpdateProduct(UpdateView):
+    model=Product
+    fields=['title', 'font_image', 'category', 'price', 'description']
+    success_url=reverse_lazy('home')
+    template_name='products/sell.html'
 #def Sell(request):
 #    if request.method=='POST':
 #        form=ProductForm(data=request.POST,
@@ -49,21 +53,30 @@ def Home(request):
 
 def category(request, id):
     category=get_object_or_404(Category, id=id)
-    categories=Category.objects.all()
     products=Product.objects.filter(category=category)
     context={
-        'categories':categories,
         'category':category,
         'products':products
     }
     return render(request, 'products/bycategories.html', context)
 
+
 def ProductView(request, id):
     product=get_object_or_404(Product, id=id)
-
+    print(product.updated-product.date_posted)
 
     context={
 
         'product':product
     }
     return render(request, 'products/product.html', context)
+
+#comment about the product
+#
+def like_product(request, product_id):
+    product=get_object_or_404(Product, id=product_id)
+    if request.user in product.likes.all():
+        product.likes.remove(request.user)
+    else:
+        product.likes.add(request.user)
+    return redirect('view_product', id=product_id)

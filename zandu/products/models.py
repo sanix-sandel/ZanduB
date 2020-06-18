@@ -64,6 +64,19 @@ class Product(models.Model):
     class Meta:
         ordering=('-date_posted',)
 
+    @property
+    def onsale(self):
+        return self.updated!=self.date_posted
+        #self.on_sale
+
+    @onsale.setter
+    def get_onsale(self):
+        if self.updated!=self.date_posted:
+            self.on_sale=True
+
+
+
+
     def __str__(self):
         return f"{self.title} uploaded by {self.owner}"
 
