@@ -9,7 +9,7 @@ from django.views.generic import(
     UpdateView
 )
 from .forms import StoreForm
-
+from products.forms import ProductForm
 
 
 class StoresList(ListView):
@@ -43,5 +43,22 @@ def StoreView(request, id):
 
     }
     return render(request, 'stores/store.html', context)
+
+
+def AddProduct(request, store_id):
+    store=get_object_or_404(Store, id=store_id)
+    if request.method=='POST':
+        form=ProductForm(data=request.POST,
+                        files=request.FILES)
+        if form.is_valid():
+            product=form.save(commit=False)
+            product.owner=store
+            product.save()
+            return redirect('view_store', id=store.id)
+    else:
+        form=ProductForm()
+    return render(request, 'stores/add_product.html',
+                    {'form':form, 'store':store})
+
 
 #follow a store

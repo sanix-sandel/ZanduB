@@ -20,6 +20,25 @@ class Sell(CreateView):
         form.instance.owner=self.request.user
         return super().form_valid(form)
 
+
+def AddProduct(request, store_id):
+    store=get_object_or_404(Store, id=store_id)
+    if request.method=='POST':
+        form=ProductForm(data=request.POST,
+                        files=request.FILES)
+        if form.is_valid():
+            product=form.save(commit=False)
+            product.owner=store
+            product.save()
+            return redirect('view_store', id=store.id)
+    else:
+        form=ProductForm()
+    return render(request, 'store/add_product.html',
+                    {'form':form})
+
+
+
+
 class UpdateProduct(UpdateView):
     model=Product
     fields=['title', 'font_image', 'category', 'price', 'description']

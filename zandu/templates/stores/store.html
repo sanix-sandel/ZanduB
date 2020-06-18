@@ -7,6 +7,28 @@
   <h4>Bootstrap 4 and CCS3 Product Cards with Transition - Techhowdy(demonguru18) - Lyoid Lopes</h4>
 <br>
 <div class="row" id="ads">
+
+  <div class="col-md-8">
+      <div class="card rounded">
+          <div class="card-image">
+
+              <span class="card-notify-badge">Low KMS</span>
+              <span class="card-notify-year">2018</span>
+              <img class="img-fluid" src="{{store.cover_image.url}}" alt="Alternate Text" />
+          </div>
+          <div class="card-image-overlay m-auto">
+              <!--<span class="card-detail-badge">Used</span>-->
+              <span class="card-detail-badge">{{store.slogan}} </span>
+              <!--<span class="card-detail-badge">13000 Kms</span>-->
+          </div>
+          <div class="card-body text-center">
+              <div class="ad-title m-auto">
+                  <h5>{{store.title}}</h5>
+              </div>
+              <a class="ad-btn" href="{% url 'add_product' store_id=store.id %}">Ajouter article</a>
+          </div>
+      </div>
+  </div>
   <!-- Category Card -->
   {% for product in products %}
   <div class="col-md-4">
