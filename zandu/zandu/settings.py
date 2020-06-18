@@ -90,6 +90,7 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 'django.template.context_processors.static',
                 'products.context_processors.categories',
+                'stores.context_processors.mystore',
 
             ],
         },

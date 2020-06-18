@@ -102,8 +102,11 @@
             <div class="sidebar-submenu">
               <ul>
                 <li>
-                  <a href="{% url 'create_store' %}">Creer ma Store
-
+                  {% if mystore %}
+                    <a href="{% url 'view_store' id=mystore.id %}">My Store
+                  {% else %}
+                    <a href="{% url 'create_store' %}">Creer ma Store
+                  {% endif %}
                   </a>
                 </li>
                 <li>

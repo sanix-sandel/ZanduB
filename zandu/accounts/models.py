@@ -23,8 +23,13 @@ class User(AbstractBaseUser):
     )
     profile_image=models.ImageField(upload_to='profile_pics/', blank=True)
     #phone
-    product=GenericRelation("products.Product")
-    store=GenericRelation("stores.Store")
+    product=GenericRelation("products.Product", content_type_field='owner_ct',
+                            object_id_field='owner_id',
+                            related_query_name='products')
+
+    store=GenericRelation("stores.Store", content_type_field='owner_ct',
+                            object_id_field='owner_id',
+                            related_query_name='store')
     #notif
     #groupe
     #location
