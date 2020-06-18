@@ -62,3 +62,21 @@ def AddProduct(request, store_id):
 
 
 #follow a store
+def follow_store(request, store_id):
+    store=get_object_or_404(Store, id=store_id)
+    if not request.user in store.followers.all():
+        store.followers.add(request.user)
+    else:
+        store.followers.remove(request.user)
+    return redirect('stores')
+
+
+class UserMixin:
+    def get_queryset(self):
+        qs=super().get_queryset()
+        return qs.filter(followers__in=[self.request.user])
+
+class FavouriteStores(UserMixin, ListView):
+    model=Store
+    context_object_name='stores'
+    template_name='stores/favourite_stores.html'
