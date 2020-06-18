@@ -64,8 +64,20 @@ def AddProduct(request, store_id):
 class MakePost(CreateView):
     model=Post
     fields=('content',)
-    template_name='stores/create_post.html'
-    success_url=reverse_lazy('home')
+    template_name='stores/make_post.html'
+    store=None
+
+    def success_url(self):
+        return reverse_lazy('home')
+
+    def get_store(self, store_id):
+        self.store=get_object_or_404(Store, id=store_id)
+        return self.store
+
+    def form_valid(self, form):
+
+        form.instance.author=self.get_store()
+        return super().form_valid(form)
 
 
 

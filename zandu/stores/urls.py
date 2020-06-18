@@ -9,6 +9,8 @@ urlpatterns = [
     path('<uuid:id>/', views.StoreView, name='view_store'),
     path('<uuid:store_id>/follow', views.follow_store, name='follow_store'),
     path('<uuid:store_id>/addproduct/', views.AddProduct, name='add_product'),
+    path('<uuid:store_id>/make_post/', views.MakePost.as_view(),
+        name='make_post'),
     path('favourite_stores/', views.FavouriteStores.as_view(),
         name='favourite_stores'),
 ]
