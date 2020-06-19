@@ -60,6 +60,7 @@ LOGOUT_REDIRECT_URL='products:home'
 
 
 
+
 SITE_ID=1 #because of allauth
 
 AUTHENTICATION_BACKENDS=(

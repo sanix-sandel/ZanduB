@@ -12,13 +12,17 @@ from django.views.generic import(
 from .forms import StoreForm, PostForm
 from products.forms import ProductForm
 from django.views.decorators.http import require_POST
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+
+
 
 class StoresList(ListView):
     model=Store
     context_object_name='stores'
     template_name='stores/stores.html'
 
-
+@login_required
 def CreateStore(request):
     if request.method=='POST':
         form=StoreForm(request.POST, request.FILES)
@@ -45,7 +49,7 @@ def StoreView(request, id):
     }
     return render(request, 'stores/store.html', context)
 
-
+@login_required
 def AddProduct(request, store_id):
     store=get_object_or_404(Store, id=store_id)
     if request.method=='POST':
@@ -77,7 +81,7 @@ def AddProduct(request, store_id):
 #        print('you make it')
 #        form.instance.author=self.get_store()
 #        return super().form_valid(form)
-
+@login_required
 def MakePost(request, store_id):
     store=get_object_or_404(Store, id=store_id)
     if request.method=='POST':
@@ -94,6 +98,7 @@ def MakePost(request, store_id):
 
 
 #follow a store
+@login_required
 def follow_store(request, store_id):
     store=get_object_or_404(Store, id=store_id)
     if not request.user in store.followers.all():
