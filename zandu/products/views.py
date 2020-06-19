@@ -9,6 +9,8 @@ from django.views.generic import (
 from .models import Product, Category
 from .forms import ProductForm
 from django.urls import reverse_lazy
+from cart.forms import CartAddProductForm
+
 
 class Sell(CreateView):
     model=Product
@@ -65,12 +67,12 @@ def category(request, id):
 def ProductView(request, id):
     product=get_object_or_404(Product, id=id)
     print(product.updated-product.date_posted)
-
+    cart_product_form=CartAddProductForm()
     context={
-
+        'cart_product_form':cart_product_form,
         'product':product
     }
-    return render(request, 'products/product.html', context)
+    return render(request, 'products/detail.html', context)
 
 #comment about the product
 #

@@ -11,7 +11,7 @@ from django.views.generic import(
 )
 from .forms import StoreForm, PostForm
 from products.forms import ProductForm
-
+from django.views.decorators.http import require_POST
 
 class StoresList(ListView):
     model=Store
