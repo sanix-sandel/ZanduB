@@ -2,6 +2,7 @@ from django.urls import path, include
 
 from . import views
 
+app_name='stores'
 
 urlpatterns = [
     path('', views.StoresList.as_view(), name='stores'),

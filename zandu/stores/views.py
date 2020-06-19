@@ -26,7 +26,7 @@ def CreateStore(request):
             store=form.save(commit=False)
             store.owner=request.user
             store.save()
-            return redirect('view_store', id=store.id)
+            return redirect('products:view_store', id=store.id)
     else:
         form=StoreForm()
     return render(request, 'stores/create_store.html',
@@ -55,7 +55,7 @@ def AddProduct(request, store_id):
             product=form.save(commit=False)
             product.owner=store
             product.save()
-            return redirect('view_store', id=store.id)
+            return redirect('products:view_store', id=store.id)
     else:
         form=ProductForm()
     return render(request, 'stores/add_product.html',
@@ -86,7 +86,7 @@ def MakePost(request, store_id):
             post=form.save(commit=False)
             post.author=store
             post.save()
-            return redirect('home')
+            return redirect('products:home')
     else:
         form=PostForm()
     return render(request, 'stores/make_post.html',
@@ -100,7 +100,7 @@ def follow_store(request, store_id):
         store.followers.add(request.user)
     else:
         store.followers.remove(request.user)
-    return redirect('stores')
+    return redirect('stores:stores')
 
 
 class UserMixin:

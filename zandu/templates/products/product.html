@@ -36,8 +36,8 @@
               <div class="ad-title m-auto">
                   <h5>{{product.on_sale}}</h5>
               </div>
-              <a class="ad-btn" href="{% url 'update_product' product.pk %}">View</a>
-                <a class="ad-btn" href="{% url 'like_product' product_id=product.id %}">Like</a>
+              <a class="ad-btn" href="{% url 'products:update_product' product.pk %}">Update</a>
+                <a class="ad-btn" href="{% url 'products:like_product' product_id=product.id %}">Like</a>
           </div>
       </div>
   </div>

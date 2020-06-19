@@ -25,8 +25,8 @@
               <div class="ad-title m-auto">
                   <h5>{{store.title}}</h5>
               </div>
-              <a class="ad-btn" href="{% url 'add_product' store_id=store.id %}">Ajouter article</a>
-                <a class="ad-btn" href="{% url 'make_post' store_id=store.id %}">Annonce</a>
+              <a class="ad-btn" href="{% url 'stores:add_product' store_id=store.id %}">Ajouter article</a>
+                <a class="ad-btn" href="{% url 'stores:make_post' store_id=store.id %}">Annonce</a>
           </div>
       </div>
   </div>

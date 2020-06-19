@@ -28,7 +28,7 @@
    <nav id="sidebar" class="sidebar-wrapper">
      <div class="sidebar-content">
        <div class="sidebar-brand">
-         <a href="{% url 'home' %}"><p>ZanduB</p></a>
+         <a href="{% url 'products:home' %}"><p>ZanduB</p></a>
          <div id="close-sidebar">
            <i class="fas fa-times"></i>
          </div>
@@ -80,7 +80,7 @@
             <div class="sidebar-submenu">
               <ul>
                 <li>
-                  <a href="{% url 'sell' %}">Vendre
+                  <a href="{% url 'products:sell' %}">Vendre
                     <span class="badge badge-pill badge-success">Pro</span>
                   </a>
                 </li>
@@ -103,17 +103,17 @@
               <ul>
                 <li>
                   {% if mystore %}
-                    <a href="{% url 'view_store' id=mystore.id %}">My Store
+                    <a href="{% url 'stores:view_store' id=mystore.id %}">My Store
                   {% else %}
-                    <a href="{% url 'create_store' %}">Creer ma Store
+                    <a href="{% url 'stores:create_store' %}">Creer ma Store
                   {% endif %}
                   </a>
                 </li>
                 <li>
-                  <a href="{% url 'favourite_stores' %}">Mes stores favoris</a>
+                  <a href="{% url 'stores:favourite_stores' %}">Mes stores favoris</a>
                 </li>
                 <li>
-                  <a href="{% url 'stores' %}">Tous les stores</a>
+                  <a href="{% url 'stores:stores' %}">Tous les stores</a>
                 </li>
               </ul>
             </div>
@@ -128,7 +128,7 @@
                 {% for category in categories %}
                   <li>
 
-                    <a href="{% url 'bycategory' category.id %}">
+                    <a href="{% url 'products:bycategory' category.id %}">
                       <i class=""> </i>
                       <span>{{category.name}}</span>
                     </a>

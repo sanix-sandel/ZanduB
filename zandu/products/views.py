@@ -13,7 +13,7 @@ from django.urls import reverse_lazy
 class Sell(CreateView):
     model=Product
     fields=['title', 'font_image', 'category', 'price', 'description']
-    success_url=reverse_lazy('home')
+    success_url=reverse_lazy('products:home')
     template_name='products/sell.html'
 
     def form_valid(self, form):
@@ -21,28 +21,10 @@ class Sell(CreateView):
         return super().form_valid(form)
 
 
-def AddProduct(request, store_id):
-    store=get_object_or_404(Store, id=store_id)
-    if request.method=='POST':
-        form=ProductForm(data=request.POST,
-                        files=request.FILES)
-        if form.is_valid():
-            product=form.save(commit=False)
-            product.owner=store
-            product.save()
-            return redirect('view_store', id=store.id)
-    else:
-        form=ProductForm()
-    return render(request, 'store/add_product.html',
-                    {'form':form})
-
-
-
-
 class UpdateProduct(UpdateView):
     model=Product
     fields=['title', 'font_image', 'category', 'price', 'description']
-    success_url=reverse_lazy('home')
+    success_url=reverse_lazy('products:home')
     template_name='products/sell.html'
 #def Sell(request):
 #    if request.method=='POST':
@@ -98,4 +80,4 @@ def like_product(request, product_id):
         product.likes.remove(request.user)
     else:
         product.likes.add(request.user)
-    return redirect('view_product', id=product_id)
+    return redirect('products:view_product', id=product_id)
