@@ -8,13 +8,13 @@ from .forms import CartAddProductForm
 def cart_add(request, product_id):
     cart=Cart(request)
     product=get_object_or_404(Product, id=product_id)
-    form=CartAddProductForm(require.POST)
+    form=CartAddProductForm(request.POST)
     if form.is_valid():
         cd=form.cleaned_data
         cart.add(product=product,
                 quantity=cd['quantity'],
                 override_quantity=cd['override'])
-    return redirect('cart:detail')
+    return redirect('cart:cart_detail')
 
 #The require_POST decorator
 #returns an HttpResponseNotAllowed object (status code 405 )
@@ -32,4 +32,4 @@ def cart_remove(request, product_id):
 
 def cart_detail(request):
     cart=Cart(request)
-    return render(request, 'cart/cart.html', {'cart':cart})    
+    return render(request, 'cart/cart.html', {'cart':cart})
