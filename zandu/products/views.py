@@ -65,14 +65,22 @@ def category(request, id):
 
 
 def ProductView(request, id):
+    from stores.models import Store
     product=get_object_or_404(Product, id=id)
-    print(product.updated-product.date_posted)
-    cart_product_form=CartAddProductForm()
-    context={
-        'cart_product_form':cart_product_form,
-        'product':product
-    }
-    return render(request, 'products/detail.html', context)
+    if type(product.owner)==Store:
+        cart_product_form=CartAddProductForm()
+        context={
+            'cart_product_form':cart_product_form,
+            'product':product
+        }
+        return render(request, 'stores/product_detail.html', context)
+    else:
+        context={
+
+            'product':product
+        }
+        return render(request, 'products/product.html', context)
+
 
 #comment about the product
 #
