@@ -37,6 +37,7 @@
                   <h5>{{product.on_sale}}</h5>
               </div>
               <a class="ad-btn" href="{% url 'update_product' product.pk %}">View</a>
+                <a class="ad-btn" href="{% url 'like_product' product_id=product.id %}">Like</a>
           </div>
       </div>
   </div>

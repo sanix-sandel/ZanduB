@@ -9,7 +9,7 @@ from django.views.generic import(
     DeleteView,
     UpdateView
 )
-from .forms import StoreForm
+from .forms import StoreForm, PostForm
 from products.forms import ProductForm
 
 
@@ -61,24 +61,36 @@ def AddProduct(request, store_id):
     return render(request, 'stores/add_product.html',
                     {'form':form, 'store':store})
 
-class MakePost(CreateView):
-    model=Post
-    fields=('content',)
-    template_name='stores/make_post.html'
-    store=None
+#class MakePost(CreateView):
+#    model=Post
+#    fields=('content',)
+#    template_name='stores/make_post.html'
+#    self.get_store()
+#    store=None
+#    def success_url(self):
+#        return reverse_lazy('home')
+#    def get_store(self, store_id):
+#        print('Life is what')
+#        self.store=get_object_or_404(Store, id=store_id)
+#        return self.store
+#    def form_valid(self, form):
+#        print('you make it')
+#        form.instance.author=self.get_store()
+#        return super().form_valid(form)
 
-    def success_url(self):
-        return reverse_lazy('home')
-
-    def get_store(self, store_id):
-        self.store=get_object_or_404(Store, id=store_id)
-        return self.store
-
-    def form_valid(self, form):
-
-        form.instance.author=self.get_store()
-        return super().form_valid(form)
-
+def MakePost(request, store_id):
+    store=get_object_or_404(Store, id=store_id)
+    if request.method=='POST':
+        form=PostForm(request.POST)
+        if form.is_valid():
+            post=form.save(commit=False)
+            post.author=store
+            post.save()
+            return redirect('home')
+    else:
+        form=PostForm()
+    return render(request, 'stores/make_post.html',
+                {'form':form})
 
 
 #follow a store

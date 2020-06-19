@@ -14,6 +14,7 @@ class ProductForm(forms.ModelForm):
         title=self.cleaned_data['title']
         price=self.cleaned_data['price']
         description=self.cleaned_data['description']
+        category=self.cleaned_data['category']
         if commit:
             product.save()
         return product
