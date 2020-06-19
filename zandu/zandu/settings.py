@@ -55,6 +55,11 @@ INSTALLED_APPS = [
     'stores.apps.StoresConfig',
 ]
 
+LOGIN_REDIRECT_URL='products:home'
+LOGOUT_REDIRECT_URL='products:home'
+
+
+
 SITE_ID=1 #because of allauth
 
 AUTHENTICATION_BACKENDS=(
@@ -90,7 +95,7 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 'django.template.context_processors.static',
                 'products.context_processors.categories',
-                'stores.context_processors.mystore',
+                #'stores.context_processors.mystore',
 
             ],
         },
