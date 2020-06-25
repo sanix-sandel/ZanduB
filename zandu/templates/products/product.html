@@ -1,13 +1,54 @@
 {% extends "base.html" %}
-{% load static %
+{% load static %}
 {% block content %}
+<h1>{{product.title}}</h1>
+<table class="table">
+ <tr>
+   <th>Name</th>
+   <td>{{ product.title }}</td>
+ </tr>
+ <tr>
+   <th><!--Cover image--></th>
+   <td>
+     <div id="imagebox" >
+        <img class="img-fluid" src="{{ product.font_image.url }}" alt="cover"/>
+     </div>
+   </td>
+ </tr>
+ <tr>
+ <th>Price</th>
+ <td>F CFA {{ product.price }}</td>
+ </tr>
+ <tr>
+   <th>Description</th>
+   <td>{{ product.description|linebreaks }}</td>
+ </tr>
+ <tr>
+   <th>Tags</th>
+    <td><!--{{ object.tags.all|join:","|default:"No tags available" }}--></td>
+ </tr>
+ <tr>
+   <th>In stock</th>
+   <td><!--{{ object.in_stock|yesno|capfirst }}--></td>
+ </tr>
+ <tr>
+   <th>Updated</th>
+   <td><!--{{ object.date_updated|date:"F Y" }}--></td>
+ </tr>
 
-<div class="container">
+ <tr>
+    <th><button class="btn btn-info"><a href="">Add to Cart</a></button></th>
+    <td><!--{{ object.date_updated|date:"F Y" }}--></td>
+  </tr>
+
+</table>
+
+<!--<div class="container">
   <br>
   <h4>Bootstrap 4 and CCS3 Product Cards with Transition - Techhowdy(demonguru18) - Lyoid Lopes</h4>
 <br>
 <div class="row" id="ads">
-  <!-- Category Card -->
+ 
 
   <div class="col-md-4">
       <div class="card rounded">
@@ -19,9 +60,9 @@
               <img class="img-fluid" src="{{product.font_image.url}}" alt="Alternate Text" />
           </div>
           <div class="card-image-overlay m-auto">
-              <!--<span class="card-detail-badge">Used</span>-->
+              
               <span class="card-detail-badge">{{product.price}} F CFA</span>
-              <!--<span class="card-detail-badge">13000 Kms</span>-->
+             
           </div>
           <div class="card-body text-center">
               <div class="ad-title m-auto">
@@ -46,5 +87,5 @@
 
 </div>
 </div>
-
+-->
 {% endblock %}

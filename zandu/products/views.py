@@ -10,6 +10,7 @@ from .models import Product, Category
 from .forms import ProductForm
 from django.urls import reverse_lazy
 from cart.forms import CartAddProductForm
+from actions.utils import notify
 
 
 class Sell(CreateView):
@@ -90,4 +91,7 @@ def like_product(request, product_id):
         product.likes.remove(request.user)
     else:
         product.likes.add(request.user)
+        print('article liked')
+        notify(user=request.user, verb='a aime votre article', target=product.owner)
+        print('notification sent')
     return redirect('products:view_product', id=product_id)

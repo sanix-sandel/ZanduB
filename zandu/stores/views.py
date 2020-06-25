@@ -30,7 +30,7 @@ def CreateStore(request):
             store=form.save(commit=False)
             store.owner=request.user
             store.save()
-            return redirect('products:view_store', id=store.id)
+            return redirect('stores:view_store', id=store.id)
     else:
         form=StoreForm()
     return render(request, 'stores/create_store.html',
@@ -59,7 +59,7 @@ def AddProduct(request, store_id):
             product=form.save(commit=False)
             product.owner=store
             product.save()
-            return redirect('products:view_store', id=store.id)
+            return redirect('stores:view_store', id=store.id)
     else:
         form=ProductForm()
     return render(request, 'stores/add_product.html',

@@ -26,6 +26,7 @@
                   <h5>{{product.title}}</h5>
               </div>
               <a class="ad-btn" href="{% url 'products:view_product' id=product.id %}">View</a>
+              <a class="ad-btn" href="{% url 'products:like_product' product_id=product.id %}">Like</a>
           </div>
       </div>
   </div>

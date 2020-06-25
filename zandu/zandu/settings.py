@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'products.apps.ProductsConfig',
     'stores.apps.StoresConfig',
+    'actions.apps.ActionsConfig',
 ]
 
 LOGIN_REDIRECT_URL='products:home'
@@ -111,8 +112,11 @@ WSGI_APPLICATION = 'zandu.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'zandub',
+        'USER':'sanix',
+        'PASSWORD':'19972017',
+        'PORT':5432
     }
 }
 

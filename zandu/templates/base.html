@@ -226,7 +226,7 @@
     </div>
     <!-- sidebar-content  -->
     <div class="sidebar-footer">
-      <a href="#">
+      <a href="{% url 'notifications' %}">
         <i class="fa fa-bell"></i>
         <span class="badge badge-pill badge-warning notification">3</span>
       </a>
@@ -238,9 +238,13 @@
         <i class="fa fa-cog"></i>
         <span class="badge-sonar"></span>
       </a>
+      
       <a href="{% url 'account_logout' %}">
         <i class="fa fa-power-off"></i>
       </a>
+      
+      
+        
     </div>
 
   </nav>
