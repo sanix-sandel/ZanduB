@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'stores.apps.StoresConfig',
     'actions.apps.ActionsConfig',
+    'searching.apps.SearchingConfig',
 ]
 
 LOGIN_REDIRECT_URL='products:home'

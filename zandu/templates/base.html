@@ -56,12 +56,15 @@
       <div class="sidebar-search">
         <div>
           <div class="input-group">
-            <input type="text" class="form-control search-menu" placeholder="Search...">
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </span>
-            </div>
+            <form action="{% url 'searching:search' %}">
+              <input name="q" type="text" class="form-control search-menu" placeholder="Search...">
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </span>
+              </div>
+            </form>
+            
           </div>
         </div>
       </div>
@@ -115,6 +118,9 @@
                 <li>
                   <a href="{% url 'stores:stores' %}">Tous les stores</a>
                 </li>
+                <li>
+                  <a href="{% url 'stores:stores' %}">Annonces</a>
+                </li>
               </ul>
             </div>
           </li>
@@ -139,26 +145,11 @@
             </div>
           </li>
           <li class="sidebar-dropdown">
-            <a href="#">
+            <a href="{% url 'products:products_liked' %}">
               <i class="fa fa-heart"></i>
               <span>Articles aimes</span>
             </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="#">Pie chart</a>
-                </li>
-                <li>
-                  <a href="#">Line chart</a>
-                </li>
-                <li>
-                  <a href="#">Bar chart</a>
-                </li>
-                <li>
-                  <a href="#">Histogram</a>
-                </li>
-              </ul>
-            </div>
+            
           </li>
           <li class="sidebar-dropdown">
             <a href="#">

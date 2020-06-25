@@ -95,3 +95,12 @@ def like_product(request, product_id):
         notify(user=request.user, verb='a aime votre article', target=product.owner)
         print('notification sent')
     return redirect('products:view_product', id=product_id)
+
+
+def products_liked(request):
+    user=request.user
+    products=user.products_liked.all()
+    context={
+        'products':products
+    }
+    return render(request, 'products/products_liked.html', context)

@@ -13,4 +13,6 @@ urlpatterns = [
 
     path('product/update/<uuid:pk>/', views.UpdateProduct.as_view(),
         name='update_product'),
+    path('products_liked/', views.products_liked,
+        name='products_liked'),    
 ]
