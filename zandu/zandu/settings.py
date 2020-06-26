@@ -62,7 +62,7 @@ LOGIN_REDIRECT_URL='products:home'
 LOGOUT_REDIRECT_URL='products:home'
 
 
-
+EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
 SITE_ID=1 #because of allauth
 
@@ -76,20 +76,12 @@ EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'#allauth
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',#per-site cache
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',#per-site cache
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-#for cache
-CACHE_MIDDLEWARE_ALIAS = 'default'
-CACHE_MIDDLEWARE_SECONDS = 60 * 15 # 15 minutes
-CACHE_MIDDLEWARE_KEY_PREFIX = 'educa'
-###
 
 ROOT_URLCONF = 'zandu.urls'
 

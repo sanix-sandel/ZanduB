@@ -14,8 +14,8 @@ from products.forms import ProductForm
 from django.views.decorators.http import require_POST
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-
-
+from .tasks import send
+from django.contrib import messages
 
 class StoresList(ListView):
     model=Store
@@ -48,6 +48,8 @@ def StoreView(request, id):
 
     }
     return render(request, 'stores/store.html', context)
+
+
 
 @login_required
 def AddProduct(request, store_id):
@@ -103,6 +105,9 @@ def follow_store(request, store_id):
     store=get_object_or_404(Store, id=store_id)
     if not request.user in store.followers.all():
         store.followers.add(request.user)
+        messages.success(request, 'message envoye')
+        send.apply_async(countdown=10)
+        return redirect('products:home')
     else:
         store.followers.remove(request.user)
     return redirect('stores:stores')
@@ -112,6 +117,7 @@ class UserMixin:
     def get_queryset(self):
         qs=super().get_queryset()
         return qs.filter(followers__in=[self.request.user])
+
 
 class FavouriteStores(UserMixin, ListView):
     model=Store
