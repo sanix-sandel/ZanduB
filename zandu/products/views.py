@@ -14,8 +14,6 @@ from actions.utils import notify
 from django.core.cache import cache
 from django.contrib import messages
 
-
-
 class Sell(CreateView):
     model=Product
     fields=['title', 'font_image', 'category', 'price', 'description']
@@ -24,7 +22,6 @@ class Sell(CreateView):
 
     def form_valid(self, form):
         form.instance.owner=self.request.user
-        
         return super().form_valid(form)
 
 

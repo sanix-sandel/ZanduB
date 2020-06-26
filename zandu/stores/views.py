@@ -14,7 +14,6 @@ from products.forms import ProductForm
 from django.views.decorators.http import require_POST
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from .tasks import send
 from django.contrib import messages
 
 class StoresList(ListView):
@@ -30,6 +29,7 @@ def CreateStore(request):
             store=form.save(commit=False)
             store.owner=request.user
             store.save()
+            request.session['store_id']=store.id#store middleware
             return redirect('stores:view_store', id=store.id)
     else:
         form=StoreForm()
@@ -40,7 +40,7 @@ def CreateStore(request):
 
 def StoreView(request, id):
     store=get_object_or_404(Store, id=id)
-
+   # request.session['store_id']=store.id
     products=store.products.all()#Product.objects.filter(owner_id=store.id).all()
     context={
         'products':products,
@@ -99,15 +99,23 @@ def MakePost(request, store_id):
                 {'form':form})
 
 
+
+def PostList(request):
+    stores_ids=Store.objects.values_list('id', flat=True)
+    posts=Post.objects.filter(author__id__in=stores_ids)
+    context={
+        'posts':posts
+    }
+    return render(request, 'stores/posts.html', context)
+
+
 #follow a store
 @login_required
 def follow_store(request, store_id):
     store=get_object_or_404(Store, id=store_id)
     if not request.user in store.followers.all():
         store.followers.add(request.user)
-        messages.success(request, 'message envoye')
-        send.apply_async(countdown=10)
-        return redirect('products:home')
+       
     else:
         store.followers.remove(request.user)
     return redirect('stores:stores')

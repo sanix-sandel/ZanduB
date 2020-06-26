@@ -28,7 +28,7 @@
               </div>
               <a class="ad-btn" href="{% url 'stores:view_store' id=store.id %}">View</a>
             {% if user in store.followers.all %}
-              <a class="ad-btn" href="#">Unfollow</a>
+              <a class="ad-btn" href="{% url 'stores:follow_store' store_id=store.id %}">Unfollow</a>
             {% else %}
               <a class="ad-btn" href="{% url 'stores:follow_store' store_id=store.id %}">Follow</a>
             {% endif %}

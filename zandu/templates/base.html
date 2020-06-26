@@ -108,8 +108,8 @@
             <div class="sidebar-submenu">
               <ul>
                 <li>
-                  {% if mystore %}
-                    <a href="{% url 'stores:view_store' id=mystore.id %}">My Store
+                  {% if request.store %}
+                    <a href="{% url 'stores:view_store' id=request.store.id %}">My Store
                   {% else %}
                     <a href="{% url 'stores:create_store' %}">Creer ma Store
                   {% endif %}
@@ -122,7 +122,7 @@
                   <a href="{% url 'stores:stores' %}">Tous les stores</a>
                 </li>
                 <li>
-                  <a href="{% url 'stores:stores' %}">Annonces</a>
+                  <a href="{% url 'stores:posts_list' %}">Annonces</a>
                 </li>
               </ul>
             </div>

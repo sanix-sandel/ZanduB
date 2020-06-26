@@ -13,4 +13,5 @@ urlpatterns = [
     path('<uuid:store_id>/make_post/', views.MakePost, name='make_post'),
     path('favourite_stores/', views.FavouriteStores.as_view(),
         name='favourite_stores'),
+    path('posts/', views.PostList, name='posts_list'),    
 ]
