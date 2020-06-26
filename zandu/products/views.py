@@ -11,7 +11,7 @@ from .forms import ProductForm
 from django.urls import reverse_lazy
 from cart.forms import CartAddProductForm
 from actions.utils import notify
-
+from django.core.cache import cache
 
 class Sell(CreateView):
     model=Product
@@ -46,11 +46,12 @@ class UpdateProduct(UpdateView):
 
 
 def Home(request):
-    products=Product.objects.all()
-
+    products=cache.get('all_products')
+    if not products:
+        products=Product.objects.all()
+        cache.set('all_products', products)
     context={
         'products':products,
-
     }
     return render(request, 'products/home.html', context)
 
