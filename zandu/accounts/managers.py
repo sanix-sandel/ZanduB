@@ -22,6 +22,7 @@ class UserManager(BaseUserManager):
             username=username,
         )
         user.is_admin=True
+        user.is_superuser=True
         user.save(using=self._db)
 
         return user
