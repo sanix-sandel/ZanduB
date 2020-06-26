@@ -6,7 +6,7 @@ from django import forms
 class UserCreationForm(forms.ModelForm):
     password1=forms.CharField(label='Mot de Passe', widget=forms.PasswordInput)
     password2=forms.CharField(label='Confirmation de Mot passe',
-                                widgets=forms.PasswordInput)
+                                widget=forms.PasswordInput)
 
     class Meta:
         model=get_user_model()
@@ -29,8 +29,6 @@ class UserCreationForm(forms.ModelForm):
 
 
 class UserChangeForm(forms.ModelForm):
-    password=ReadOnlyPasswordHashField()
-
     class Meta:
         model=get_user_model()
-        fields=('username', 'email')#city,
+        fields=('username', 'email', 'profile_image')#city,

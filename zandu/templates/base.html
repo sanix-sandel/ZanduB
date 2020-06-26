@@ -44,8 +44,8 @@
             <img alt="" src="http://lorempixel.com/100/100/people/9/">
           </div>
             <div class="user-info">
-              <span class="user-name">Jhon
-                <strong>Smith</strong>
+              <a href="{% url 'accounts:update_profile' pk=user.pk %}"><span class="user-name">
+                <strong>{{user.username}}</strong></a>
               </span>
               <span class="user-role">Administrator</span>
               <span class="user-status">
