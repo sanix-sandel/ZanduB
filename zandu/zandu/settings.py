@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'actions.apps.ActionsConfig',
     'searching.apps.SearchingConfig',
     'memcache_status',
+    'channels',
+    'chat.apps.ChatConfig',
 ]
 
 LOGIN_REDIRECT_URL='products:home'
@@ -106,6 +108,8 @@ TEMPLATES = [
         },
     },
 ]
+
+ASGI_APPLICATION = 'zandu.routing.application'
 
 WSGI_APPLICATION = 'zandu.wsgi.application'
 

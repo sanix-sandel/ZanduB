@@ -41,7 +41,7 @@
               alt="User picture">
             </div>-->
           <div class="avatar">
-            <img alt="" src="http://lorempixel.com/100/100/people/9/">
+            <img alt="" src="">
           </div>
             <div class="user-info">
               <a href="{% url 'accounts:update_profile' pk=user.pk %}"><span class="user-name">
@@ -224,7 +224,7 @@
         <i class="fa fa-bell"></i>
         <span class="badge badge-pill badge-warning notification">3</span>
       </a>
-      <a href="#">
+      <a href="{% url 'chat:chat_room' %}">
         <i class="fa fa-envelope"></i>
         <span class="badge badge-pill badge-success notification">7</span>
       </a>

@@ -15,6 +15,7 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from actions.utils import notify
 
 class StoresList(ListView):
     model=Store
@@ -101,7 +102,8 @@ def MakePost(request, store_id):
 
 
 def PostList(request):
-    stores_ids=Store.objects.values_list('id', flat=True)
+    stores_ids=Store.objects.filter(followers__in=request.user).values_list('id', flat=True)
+    print (stores)
     posts=Post.objects.filter(author__id__in=stores_ids)
     context={
         'posts':posts
@@ -115,6 +117,7 @@ def follow_store(request, store_id):
     store=get_object_or_404(Store, id=store_id)
     if not request.user in store.followers.all():
         store.followers.add(request.user)
+        notify(user=request.user, verb='is following your store', target=store.owner)
        
     else:
         store.followers.remove(request.user)

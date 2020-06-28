@@ -14,6 +14,7 @@ from actions.utils import notify
 from django.core.cache import cache
 from django.contrib import messages
 
+
 class Sell(CreateView):
     model=Product
     fields=['title', 'font_image', 'category', 'price', 'description']
