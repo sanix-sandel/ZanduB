@@ -2,6 +2,9 @@ import json
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 from .models import Message
+from django.shortcuts import get_object_or_404
+
+
 
 class ChatConsumer(WebsocketConsumer):
 
@@ -38,6 +41,7 @@ class ChatConsumer(WebsocketConsumer):
 
 
     def new_message(self, data):
+        from accounts.models import User
         author=data['from']
         author_user=get_object_or_404(User, username=author)
         message=Message.objects.create(author=author_user,

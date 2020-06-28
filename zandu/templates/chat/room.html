@@ -121,6 +121,7 @@
 <script >$(".messages").animate({ scrollTop: $(document).height() }, "fast");
 -->
 <script>
+  var username={{username}}
   var url='ws://'+window.location.host+'/ws/chat/'
 
   const chatSocket=new WebSocket(url);
@@ -161,7 +162,7 @@
       chatSocket.send(JSON.stringify({
         'command':'new_message',
         'message':message,
-        'from':user.username
+        'from':username
       }));
     }
    
