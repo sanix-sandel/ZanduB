@@ -125,6 +125,11 @@
 
   const chatSocket=new WebSocket(url);
 
+  chatSocket.onopen=function(e){
+    fetchMessages();
+  }
+    
+
   chatSocket.onmessage=function(e){
     const data=JSON.parse(e.data);
     document.querySelector('#chat-log').value+=(data.message+'\n');
@@ -144,13 +149,19 @@
     }
   }
 
+  function fetchMessages(){
+    chatSocket.send(JSON.stringify({'command':'fetch_messages'}));
+  }
+
   document.querySelector('#chat-message-submit').onclick=function(e){
     
     const messageInputDom=document.querySelector('#chat-message-input');
     const message=messageInputDom.value;
     if (message.length>0){
       chatSocket.send(JSON.stringify({
-        'message':message
+        'command':'new_message',
+        'message':message,
+        'from':user.username
       }));
     }
    
