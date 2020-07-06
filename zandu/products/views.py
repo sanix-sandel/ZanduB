@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView,
     DetailView,
@@ -15,7 +17,14 @@ from django.core.cache import cache
 from django.contrib import messages
 
 
-class Sell(CreateView):
+
+class OwnerMixin(object):
+    def get_queryset(self):
+        qs=super().get_queryset()
+        return qs.filter(owner=self.request.user)
+
+
+class Sell(LoginRequiredMixin, CreateView):
     model=Product
     fields=['title', 'font_image', 'category', 'price', 'description']
     success_url=reverse_lazy('products:home')
@@ -26,7 +35,7 @@ class Sell(CreateView):
         return super().form_valid(form)
 
 
-class UpdateProduct(UpdateView):
+class UpdateProduct(LoginRequiredMixin, OwnerMixin, UpdateView):
     model=Product
     fields=['title', 'font_image', 'category', 'price', 'description']
     success_url=reverse_lazy('products:home')
@@ -99,7 +108,7 @@ def like_product(request, product_id):
         print('notification sent')
     return redirect('products:view_product', id=product_id)
 
-
+@login_required
 def products_liked(request):
     user=request.user
     products=user.products_liked.all()

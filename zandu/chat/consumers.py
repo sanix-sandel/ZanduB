@@ -1,4 +1,4 @@
-import json
+"""import json
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 from .models import Message
@@ -108,4 +108,4 @@ class ChatConsumer(WebsocketConsumer):
         message=event['message']
 
         #send message to websocket
-        self.send(text_data=json.dumps(message))    
+        self.send(text_data=json.dumps(message))    """

@@ -93,6 +93,7 @@ def MakePost(request, store_id):
             post=form.save(commit=False)
             post.author=store
             post.save()
+            notify(verb='a fait une annonce', )
             return redirect('products:home')
     else:
         form=PostForm()
@@ -102,9 +103,7 @@ def MakePost(request, store_id):
 
 
 def PostList(request):
-    stores_ids=Store.objects.filter(followers__in=request.user).values_list('id', flat=True)
-    print (stores)
-    posts=Post.objects.filter(author__id__in=stores_ids)
+    posts=Post.objects.all()
     context={
         'posts':posts
     }
@@ -117,7 +116,7 @@ def follow_store(request, store_id):
     store=get_object_or_404(Store, id=store_id)
     if not request.user in store.followers.all():
         store.followers.add(request.user)
-        notify(user=request.user, verb='is following your store', target=store.owner)
+        notify(user=request.user, verb='admire votre store', target=store.owner)
        
     else:
         store.followers.remove(request.user)
@@ -130,7 +129,7 @@ class UserMixin:
         return qs.filter(followers__in=[self.request.user])
 
 
-class FavouriteStores(UserMixin, ListView):
+class FavouriteStores(LoginRequiredMixin, UserMixin, ListView):
     model=Store
     context_object_name='stores'
     template_name='stores/favourite_stores.html'

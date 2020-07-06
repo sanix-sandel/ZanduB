@@ -56,8 +56,8 @@ INSTALLED_APPS = [
     'actions.apps.ActionsConfig',
     'searching.apps.SearchingConfig',
     'memcache_status',
-    'channels',
-    'chat.apps.ChatConfig',
+   # 'channels',
+   # 'chat.apps.ChatConfig',
 ]
 
 LOGIN_REDIRECT_URL='products:home'
@@ -109,15 +109,15 @@ TEMPLATES = [
     },
 ]
 
-ASGI_APPLICATION = 'zandu.routing.application'
-CHANNEL_LAYERS = {
+#ASGI_APPLICATION = 'zandu.routing.application'
+"""CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
             "hosts": [('127.0.0.1', 6379)],
         },
     },
-}
+}"""
 
 WSGI_APPLICATION = 'zandu.wsgi.application'
 

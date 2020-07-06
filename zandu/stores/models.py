@@ -50,6 +50,9 @@ class Post(models.Model):
     author=models.ForeignKey(Store, related_name='post', on_delete=models.CASCADE)
     date_uploaded=models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering=('-date_uploaded',)
+
     def __str__(self):
         return f"post belonging to {store}"
 
