@@ -30,6 +30,7 @@ urlpatterns = [
     path('search/', include('searching.urls', namespace='searching')),
     path('accounts/', include('accounts.urls', namespace='accounts')),
    # path('chat/', include('chat.urls', namespace='chat')),
+   path('api/', include('api.urls')),
 
 ]
 

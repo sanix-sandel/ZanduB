@@ -5,19 +5,19 @@ from products.models import *
 from actions.models import *
 
 
-class UserSerializer(serializers.MoldelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model=get_user_model()
         fields='__all__'
 
 
-class ProductSerilaizer(serializers.ModelSerialzer):
+class ProductSerilaizer(serializers.ModelSerializer):
     class Meta:
         model=Product
         fields='__all__'
 
 
-class StoreSerilaizer(serializers.ModelSerializer):
+class StoreSerializer(serializers.ModelSerializer):
     model=Store
     fields='__all__'
 
