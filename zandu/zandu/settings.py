@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',#for allauth
 
+    'rest_framework',
+    'corsheaders',
+
     'allauth',
     'allauth.account',
     'crispy_forms',
@@ -58,6 +61,7 @@ INSTALLED_APPS = [
     'memcache_status',
    # 'channels',
    # 'chat.apps.ChatConfig',
+   'api.apps.ApiConfig',
 ]
 
 LOGIN_REDIRECT_URL='products:home'
