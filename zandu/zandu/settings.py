@@ -64,6 +64,12 @@ INSTALLED_APPS = [
    'api.apps.ApiConfig',
 ]
 
+REST_FRAMEWORK={
+    'DEFAULT_PERMISSION_CLASSES':[
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
+
 LOGIN_REDIRECT_URL='products:home'
 LOGOUT_REDIRECT_URL='products:home'
 
@@ -106,7 +112,7 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 'django.template.context_processors.static',
                 'products.context_processors.categories',
-                'stores.context_processors.my_store',
+   #             'stores.context_processors.my_store',
 
             ],
         },

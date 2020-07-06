@@ -4,25 +4,33 @@ from stores.models import *
 from products.models import *
 from actions.models import *
 
-
 class UserSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model=get_user_model()
-        fields='__all__'
-
-
-class ProductSerilaizer(serializers.ModelSerializer):
-    class Meta:
-        model=Product
-        fields='__all__'
-
+        fields=('id', 'username', 'email', 'profile_image', 'is_active', 'reports')
 
 class StoreSerializer(serializers.ModelSerializer):
-    model=Store
-    fields='__all__'
+    #followers=UserSerializer(read_only=True)
+    class Meta:
+        model=Store
+        fields='__all__'
+
 
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model=Category
-        fields='__all__'    
+        fields='__all__'       
+
+
+class ProductSerilaizer(serializers.ModelSerializer):
+    category=CategorySerializer()
+  #  likes=UserSerializer()
+    class Meta:
+        model=Product
+        fields='__all__'
+
+
+
+ 

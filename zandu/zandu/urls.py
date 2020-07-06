@@ -31,6 +31,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls', namespace='accounts')),
    # path('chat/', include('chat.urls', namespace='chat')),
    path('api/', include('api.urls')),
+   path('api-auth/', include('rest_framework.urls')),
 
 ]
 
