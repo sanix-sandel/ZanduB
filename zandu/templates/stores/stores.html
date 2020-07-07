@@ -26,11 +26,17 @@
               <div class="ad-title m-auto">
                 <h5>{{store.title}}</h5>
               </div>
-              <a class="ad-btn" href="{% url 'stores:view_store' id=store.id %}">View</a>
+              <a class="ad-btn" href="{% url 'stores:view_store' id=store.id %}">
+                <span class="badge badge-primary">View</span>
+              </a>
             {% if user in store.followers.all %}
-              <a class="ad-btn" href="{% url 'stores:follow_store' store_id=store.id %}">Unfollow</a>
+              <a class="ad-btn" href="{% url 'stores:follow_store' store_id=store.id %}">
+                <span class="badge badge-primary">Unfollow</span>
+              </a>
             {% else %}
-              <a class="ad-btn" href="{% url 'stores:follow_store' store_id=store.id %}">Follow</a>
+              <a class="ad-btn" href="{% url 'stores:follow_store' store_id=store.id %}">
+                <span class="badge badge-primary">Follow</span>
+              </a>
             {% endif %}
           </div>
       </div>

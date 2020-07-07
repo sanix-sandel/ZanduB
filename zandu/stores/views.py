@@ -142,3 +142,7 @@ class FavouriteStores(LoginRequiredMixin, UserMixin, ListView):
     model=Store
     context_object_name='stores'
     template_name='stores/favourite_stores.html'
+
+
+def store_cart(request):
+    return render(request, 'stores/store_cart.html')

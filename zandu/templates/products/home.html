@@ -13,8 +13,8 @@
   <div class="col-md-4">
       <div class="card rounded">
           <div class="card-image">
-              <span class="card-notify-badge">Low KMS</span>
-              <span class="card-notify-year">2018</span>
+              
+    
               <img class="img-fluid" src="{{product.font_image.url}}" alt="Alternate Text" />
           </div>
           <div class="card-image-overlay m-auto">
@@ -26,8 +26,12 @@
               <div class="ad-title m-auto">
                   <h5>{{product.title}}</h5>
               </div>
-              <a class="ad-btn" href="{% url 'products:view_product' id=product.id %}">View</a>
-              <a class="ad-btn" href="{% url 'products:like_product' product_id=product.id %}">Like</a>
+              <a class="ad-btn" href="{% url 'products:view_product' id=product.id %}">
+                <span class="badge badge-primary">View</span>
+              </a>
+              <a class="ad-btn" href="{% url 'products:like_product' product_id=product.id %}">
+                <span class="badge badge-primary">Like</span>
+              </a>
           </div>
       </div>
   </div>
