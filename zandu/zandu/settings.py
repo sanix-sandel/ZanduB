@@ -61,7 +61,7 @@ INSTALLED_APPS = [
     'memcache_status',
    # 'channels',
    # 'chat.apps.ChatConfig',
-   'api.apps.ApiConfig',
+    'api.apps.ApiConfig',
 ]
 
 REST_FRAMEWORK={

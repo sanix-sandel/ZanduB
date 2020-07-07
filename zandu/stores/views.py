@@ -16,6 +16,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from actions.utils import notify
+from .tasks import notify_followers
+import json
 
 class StoresList(ListView):
     model=Store
@@ -93,13 +95,20 @@ def MakePost(request, store_id):
             post=form.save(commit=False)
             post.author=store
             post.save()
-            notify(verb='a fait une annonce', )
+            followers=store.followers.all()
+            for follower in followers:
+                notify(user=request.user, verb='a fait une annonce', target=follower)
             return redirect('products:home')
     else:
         form=PostForm()
     return render(request, 'stores/make_post.html',
                 {'form':form})
 
+ 
+ #followers=json.dumps(followers)
+ #           print (followers)
+           # for follower in followers:
+           #     notify_followers.delay(followers=followers)
 
 
 def PostList(request):
