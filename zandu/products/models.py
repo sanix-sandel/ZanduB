@@ -6,7 +6,7 @@ from django.contrib.contenttypes.fields import (
     GenericForeignKey,
     GenericRelation
 )
-
+from taggit.managers import TaggableManager
 
 class Category(models.Model):
     id=models.UUIDField(
@@ -55,6 +55,7 @@ class Product(models.Model):
     likes=models.ManyToManyField(settings.AUTH_USER_MODEL,
                                 blank=True,
                                 related_name='products_liked')
+    tags = TaggableManager()                            
     views=models.PositiveIntegerField(default=0)
     available=models.BooleanField(default=True)
     date_posted=models.DateTimeField(auto_now_add=True)

@@ -18,6 +18,7 @@ from django.contrib import messages
 
 
 
+
 class OwnerMixin(object):
     def get_queryset(self):
         qs=super().get_queryset()
