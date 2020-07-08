@@ -10,9 +10,9 @@ class Order(models.Model):
             editable=False
     )
     customer=models.ForeignKey(settings.AUTH_USER_MODEL,
-                                related_name='order',
+                                related_name='orders',
                                 on_delete=models.CASCADE)
-
+    store=models.ForeignKey("stores.Store", related_name='orders', on_delete=models.CASCADE)
     created=models.DateTimeField(auto_now_add=True)
     updated=models.BooleanField(default=False)
     paid=models.BooleanField(default=False)
