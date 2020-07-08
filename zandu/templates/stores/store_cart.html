@@ -25,14 +25,16 @@
 	                            </tr>
 	                        </thead>
 	                        <tbody>
+								{% for item in cart %}
+								{% with product=item.product %}
 	                            <tr>
 	                                <td>
 	                                	<div class="display-flex align-center">
 		                                    <div class="img-product">
-		                                        <img src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg" alt="" class="mCS_img_loaded">
+		                                        <img src="{{product.font_image.url}}">
 		                                    </div>
 		                                    <div class="name-product">
-		                                        Apple iPad Mini
+		                                        {{product.title}}
 		                                        <br>G2356
 		                                    </div>
 		                                    <div class="price">
@@ -57,40 +59,10 @@
 	                                        <img src="images/icons/delete.png" alt="" class="mCS_img_loaded">
 	                                    </a>
 	                                </td>
-	                            </tr>
-	                            <tr>
-	                                <td>
-	                                	<div class="display-flex align-center">
-		                                    <div class="img-product">
-		                                        <img src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg" alt="" class="mCS_img_loaded">
-		                                    </div>
-		                                    <div class="name-product">
-		                                        Apple iPad Mini
-		                                        <br>G2356
-		                                    </div>
-		                                    <div class="price">
-		                                        $1,250.00
-		                                    </div>
-	                                    </div>
-	                                </td>
-	                                <td class="product-count">
-	                                    <form action="#" class="count-inlineflex">
-										    <div class="qtyminus">-</div>
-										    <input type="text" name="quantity" value="1" class="qty">
-										    <div class="qtyplus">+</div>
-										</form>
-	                                </td>
-	                                <td>
-	                                    <div class="total">
-	                                        $6,250.00
-	                                    </div>
-	                                </td>
-	                                <td>
-	                                    <a href="#" title="">
-	                                        <img src="images/icons/delete.png" alt="" class="mCS_img_loaded">
-	                                    </a>
-	                                </td>
-	                            </tr>
+								</tr>
+								{% endwith %}
+								{% endfor %}
+	                           
 	                        </tbody>
 	                    </table>
 	                    <div class="coupon-box">
