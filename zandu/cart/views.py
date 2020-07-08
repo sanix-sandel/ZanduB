@@ -38,6 +38,7 @@ def cart_detail(request, cart_id, store_id):
     cart=Cart(request, cart_id)
     context={
         'cart':cart,
-        'store':store
+        'store':store,
+        'cart_id':cart_id
     }
     return render(request, 'stores/store_cart.html', context)

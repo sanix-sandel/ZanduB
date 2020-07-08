@@ -13,7 +13,7 @@
 		<div class="container">
 	        <div class="row">
 			    <div class="col-lg-8">
-			        <div class="main-heading">Shopping Cart {{store.title}}</div>
+			        <div class="main-heading">Shopping Cart {{store.title}} {{cart_id}}</div>
 			        <div class="table-cart">
 	                    <table>
 	                        <thead>
@@ -99,7 +99,7 @@
 			                </table>
 			                <div class="btn-cart-totals">
 			                    <a href="#" class="update round-black-btn" title="">Update Cart</a>
-			                    <a href="{% url 'orders:order_create' cart_id=cart_id %}" class="checkout round-black-btn" title="">Proceed to Checkout</a>
+			                  	<a href="{% url 'orders:order_create' cart_id=cart_id %}" class="checkout round-black-btn" title="">Proceed to Checkout</a>-->
 			                </div>
 			                <!-- /.btn-cart-totals -->
 			            </form>
