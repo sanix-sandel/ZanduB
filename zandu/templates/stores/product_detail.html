@@ -38,14 +38,16 @@
 
  <tr>
     <th>
-      <form action="{% url "cart:cart_add" product.id %}" method='post'>
-        {{cart_product_form}}
+      <form action="" method='post'>
         {% csrf_token %}
+        {{cart_product_form}}
+        
        <!-- <input type='submit' value="Add to cart">-->
+       <th><input type="submit" class="btn btn-info" value="Add to cart"></th>
       </form>
     </th>  
 
-    <th><button class="btn btn-info"><a href="">Add to Cart</a></button></th>
+    
     <td><!--{{ object.date_updated|date:"F Y" }}--></td>
   </tr>
 

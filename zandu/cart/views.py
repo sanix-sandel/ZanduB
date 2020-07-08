@@ -5,8 +5,8 @@ from .cart import Cart
 from .forms import CartAddProductForm
 
 @require_POST #only post request
-def cart_add(request, product_id):
-    cart=Cart(request)
+def cart_add(request, product_id, cart_id, store_id):
+    cart=Cart(request, cart_id)
     product=get_object_or_404(Product, id=product_id)
     form=CartAddProductForm(request.POST)
     if form.is_valid():
@@ -14,7 +14,9 @@ def cart_add(request, product_id):
         cart.add(product=product,
                 quantity=cd['quantity'],
                 override_quantity=cd['override'])
-    return redirect('cart:cart_detail')
+    return redirect('cart:cart_detail', 
+                    cart_id=cart_id, 
+                    store_id=store_id)
 
 #The require_POST decorator
 #returns an HttpResponseNotAllowed object (status code 405 )
@@ -23,13 +25,19 @@ def cart_add(request, product_id):
 #you only allow POST requests for this view.
 
 @require_POST
-def cart_remove(request, product_id):
-    cart=Cert(request)
+def cart_remove(request, product_id, cart_id):
+    cart=Cart(request, cart_id)
     product=get_object_or_404(Product, id=product_id)
     cart.remove(product)
-    return redirect('cart:cart_detail')
+    return redirect('cart:cart_detail', cart_id=cart_id)
 
 
-def cart_detail(request):
-    cart=Cart(request)
-    return render(request, 'cart/cart.html', {'cart':cart})
+def cart_detail(request, cart_id, store_id):
+    from stores.models import Store
+    store=get_object_or_404(Store, id=store_id)
+    cart=Cart(request, cart_id)
+    context={
+        'cart':cart,
+        'store':store
+    }
+    return render(request, 'stores/store_cart.html', context)

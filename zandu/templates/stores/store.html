@@ -48,7 +48,7 @@
               <div class="ad-title m-auto">
                   <h5>{{product.title}}</h5>
               </div>
-              <a class="ad-btn" href="#">View</a>
+              <a class="ad-btn" href="{% url 'products:view_product' product.id %}">View</a>
           </div>
       </div>
   </div>

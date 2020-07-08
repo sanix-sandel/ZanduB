@@ -5,12 +5,12 @@ from products.models import Product
 
 class Cart(object):
 
-    def __init__(self, request):
+    def __init__(self, request, cart_id):
 
         self.session=request.session
-        cart=self.session.get(settings.CART_SESSION_ID)
+        cart=self.session.get(cart_id)
         if not cart:
-            cart=self.session[settings.CART_SESSION_ID]={}
+            cart=self.session[cart_id]={}
         self.cart=cart
 
 

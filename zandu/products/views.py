@@ -79,13 +79,34 @@ def category(request, id):
 
 def ProductView(request, id):
     from stores.models import Store
+    from cart.cart import Cart
+
     product=get_object_or_404(Product, id=id)
     if type(product.owner)==Store:
-        cart_product_form=CartAddProductForm()
+        cart_product_form=CartAddProductForm(request.POST)
         context={
             'cart_product_form':cart_product_form,
-            'product':product
+            'product':product,
+            'store_id':product.owner.id
         }
+        if cart_product_form.is_valid():
+            print('life is')
+            
+            cd=cart_product_form.cleaned_data
+            
+            cart_id=str(request.user)+str(product.owner.id)
+
+            cart=Cart(request, cart_id)
+
+            cart.add(product=product, 
+                    quantity=cd['quantity'], 
+                    override_quantity=cd['override'])
+            
+
+            return redirect('cart:cart_detail', 
+                    cart_id=cart_id, 
+                    store_id=product.owner.id)
+        print('an error')
         return render(request, 'stores/product_detail.html', context)
     else:
         context={
