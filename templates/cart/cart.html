@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+{% block title %}
+
+  Votre carte de Shopping
+
+{% endblock %}
+
+{% block content %}
+
+<h1>Your shopping cart</h1>
+  <table class="cart">
+      <thead>
+          <tr>
+              <th>Image</th>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Remove</th>
+              <th>Unit price</th>
+              <th>Price</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for item in cart %}
+              {% with product=item.product %}
+                  <tr>
+                      <td>
+                          <a href="">
+                          <img src="{{product.font_image.url}}">
+                          </a>
+                      </td>
+                      <td>{{product.title}}</td>
+                      <td> {{item.quantity}}
+                          <form action="{% url "cart:cart_add" product.id %}" method="post">
+                              {{ item.update_quantity_form.quantity }}
+                              {{ item.update_quantity_form.update }}
+                              <input type="submit" value="Update">
+                              {% csrf_token %}
+                          </form>
+                      </td>
+                      <td ><a href="{% url 'cart:cart_remove' product.id%}">Remove</a></td>
+                      <td class="num">F CFA {{item.price}}</td>
+                      <td class="num">F CFA {{item.total_price}}</td>
+                  </tr>
+              {% endwith %}
+          {% endfor %}
+          <tr class="total">
+              <td>Total</td>
+              <td colspan="4"></td>
+              <td class="num">F CFA{{cart.get_total_price}}</td>
+          </tr>
+      </tbody>
+  </table>
+  <p class="text-right">
+      Checkout
+  </p>
+{% endblock %}

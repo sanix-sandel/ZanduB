@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+  <br>
+  <h4>Bootstrap 4 and CCS3 Product Cards with Transition - Techhowdy(demonguru18) - Lyoid Lopes</h2>
+<br>
+<div class="row" id="ads">
+  <!-- Category Card -->
+  {% for product in products %}
+  <div class="col-md-4">
+      <div class="card rounded">
+          <div class="card-image">
+              
+              <img class="img-fluid" src="{{product.font_image.url}}" alt="Alternate Text" />
+          </div>
+          <div class="card-image-overlay m-auto">
+              <!--<span class="card-detail-badge">Used</span>-->
+              <span class="card-detail-badge"><mark>{{product.price}} F CFA</mark></span>
+              <!--<span class="card-detail-badge">13000 Kms</span>-->
+          </div>
+          <div class="card-body text-center">
+              <div class="ad-title m-auto">
+                  <h5>{{product.title}}</h5>
+              </div>
+              <a class="badge badge-primary" href="{% url 'products:view_product' id=product.id %}">View</a>
+          </div>
+      </div>
+  </div>
+  {% endfor %}
+
+
+</div>
+</div>
+
+{% endblock %}
