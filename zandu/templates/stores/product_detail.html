@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1>{{product.title}}</h1>
+<table class="table">
+ <tr>
+   <th>Name</th>
+   <td>{{ product.title }}</td>
+ </tr>
+ <tr>
+   <th><!--Cover image--></th>
+   <td>
+     <div id="imagebox" >
+        <img class="img-fluid" src="{{ product.font_image.url }}" alt="cover"/>
+     </div>
+   </td>
+ </tr>
+ <tr>
+ <th>Price</th>
+ <td>F CFA {{ product.price }}</td>
+ </tr>
+ <tr>
+   <th>Description</th>
+   <td>{{ product.description|linebreaks }}</td>
+ </tr>
+ <tr>
+   <th>Tags</th>
+    <td><!--{{ object.tags.all|join:","|default:"No tags available" }}--></td>
+ </tr>
+ <tr>
+   <th>In stock</th>
+   <td><!--{{ object.in_stock|yesno|capfirst }}--></td>
+ </tr>
+ <tr>
+   <th>Updated</th>
+   <td><!--{{ object.date_updated|date:"F Y" }}--></td>
+ </tr>
+
+ <tr>
+    <th>
+      <form action="" method='post'>
+        {% csrf_token %}
+        {{cart_product_form}}
+        
+       <!-- <input type='submit' value="Add to cart">-->
+       <th><input type="submit" class="btn btn-info" value="Add to cart"></th>
+      </form>
+    </th>  
+
+    
+    <td><!--{{ object.date_updated|date:"F Y" }}--></td>
+  </tr>
+
+</table>
+
+<!--<div class="container">
+  <br>
+  <h4>Bootstrap 4 and CCS3 Product Cards with Transition - Techhowdy(demonguru18) - Lyoid Lopes</h4>
+<br>
+<div class="row" id="ads">
+ 
+
+  <div class="col-md-4">
+      <div class="card rounded">
+          <div class="card-image">
+              <span class="card-notify-badge">Low KMS</span>
+              <span class="card-notify-year">
+                {{product.get_onsale}}
+              </span>
+              <img class="img-fluid" src="{{product.font_image.url}}" alt="Alternate Text" />
+          </div>
+          <div class="card-image-overlay m-auto">
+              
+              <span class="card-detail-badge">{{product.price}} F CFA</span>
+             
+          </div>
+          <div class="card-body text-center">
+              <div class="ad-title m-auto">
+                  <h5>{{product.title}}</h5>
+              </div>
+              <div class="ad-title m-auto">
+                  <h5>{{product.date_posted}}</h5>
+              </div>
+              <div class="ad-title m-auto">
+                  <h5>{{product.updated}}</h5>
+              </div>
+              <div class="ad-title m-auto">
+                  <h5>{{product.on_sale}}</h5>
+              </div>
+              <a class="ad-btn" href="{% url 'products:update_product' product.pk %}">Update</a>
+                <a class="ad-btn" href="{% url 'products:like_product' product_id=product.id %}">Like</a>
+          </div>
+      </div>
+  </div>
+  {{product.description}}
+
+
+</div>
+</div>
+-->
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
