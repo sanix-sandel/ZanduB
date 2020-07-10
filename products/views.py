@@ -16,6 +16,8 @@ from actions.utils import notify
 from django.core.cache import cache
 from django.contrib import messages
 
+from api.serializers import ProductSerializer
+
 
 
 
@@ -130,6 +132,31 @@ def like_product(request, product_id):
         notify(user=request.user, verb='a aime votre article', target=product.owner)
         print('notification sent')
     return redirect('products:view_product', id=product_id)
+
+
+@login_required
+def like_product_by_api(request, *args, **kwargs):
+    serializer=ProductSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        
+        product_id=data.get("id")
+        product=get_object_or_404(Product, id=product_id)
+        if request.user in product.likes.all():
+            product.likes.remove(request.user)
+            serializer=ProductSerializer(product)
+            print('arcticle disliked')
+            return Response({serializer.data}, status=200)
+            
+        else:
+            product.likes.add(request.user)
+            print('article liked')
+            serializer=ProductSerializer(product)
+            notify(user=request.user, verb='a aime votre article', target=product.owner)
+            
+            return Response({serializer.data}, status=200)
+    return Response({}, status=200)
+
+
 
 @login_required
 def products_liked(request):

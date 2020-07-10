@@ -24,7 +24,7 @@ class CategorySerializer(serializers.ModelSerializer):
         fields='__all__'       
 
 
-class ProductSerilaizer(serializers.ModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
     category=CategorySerializer()
   #  likes=UserSerializer()
     class Meta:

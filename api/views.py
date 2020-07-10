@@ -18,7 +18,7 @@ class UserListView(generics.ListAPIView):
 class ProductListView(generics.ListAPIView):
     permissions_class=(permissions.IsAuthenticated,)
     queryset=Product.objects.all()    
-    serializer_class=ProductSerilaizer
+    serializer_class=ProductSerializer
 
 
 class StoreListView(generics.ListAPIView):

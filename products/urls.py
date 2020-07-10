@@ -8,7 +8,7 @@ urlpatterns = [
     path('category/<uuid:id>', views.category, name='bycategory'),
     path('product/<uuid:id>', views.ProductView, name='view_product'),
     path('product/sell', views.Sell.as_view(), name='sell'),
-    path('product/like/<uuid:product_id>', views.like_product,
+    path('product/like/<uuid:product_id>', views.like_product_by_api,
         name='like_product'),
 
     path('product/update/<uuid:pk>/', views.UpdateProduct.as_view(),
