@@ -5,7 +5,7 @@
 <table class="table">
  <tr>
    <th>Name</th>
-   <td>{{ product.title }}</td>
+   <td>{{product.title}}</td>
  </tr>
  <tr>
    <th><!--Cover image--></th>
@@ -38,19 +38,26 @@
 
  <tr>
     <th>
-      <form action="" method='post'>
+      <form action="" id="laForme" method='post'>
         {% csrf_token %}
         {{cart_product_form}}
         
        <!-- <input type='submit' value="Add to cart">-->
        <th><input type="submit" class="btn btn-info" value="Add to cart"></th>
+       <th><button type="button" class="btn btn-warning">
+        <a href="{% url 'cart:cart_detail' cart_id=cart_id store_id=store_id %}">
+          My {{store.title}} cart
+        </a>
+        
+      </button></th>
       </form>
+      
     </th>  
 
     
     <td><!--{{ object.date_updated|date:"F Y" }}--></td>
   </tr>
-
+    
 </table>
 
 <!--<div class="container">
@@ -98,9 +105,56 @@
 </div>
 </div>
 -->
+{{cart_id|json_script:"cart_id"}}
+{{product.id|json_script:"product.id"}}
+{{store.id|json_script:"store.id"}}
+
+<script>
+/*
+  function getId(){
+    var product_id=JSON.parse(document.getElementById('product.id').textContent)
+    var store_id=JSON.parse(document.getElementById('store.id').textContent)
+    console.log(product_id)
+    console.log(store_id)
+    console.log(typeof(store_id))
+  }
+  getId();
+
+  function AddAction(event){
+    event.preventDefault()
+    const theForm=event.target
+    const form=new FormData(theForm)
+    console.log(form)
+    const xhr=new XMLHttpRequest()
+    xhr.reponseType="json"
+    const method='POST'
+    var product_id=JSON.parse(document.getElementById('product.id').textContent)
+    var store_id=JSON.parse(document.getElementById('store.id').textContent)
+    //const id=document.getElementById("product_id")
+    const url=`cart/add/${product_id}/`;
+    xhr.open(method, url)
+    xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")//Django Ajax
+    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")//Django Ajax
+    xhr.onload=function(){
+      if (xhr.status===201){
+        const serverResponse=xhr.response
+        console.log(serverResponse)
+        
+      }
+    }
+    xhr.send(form)
+
+  }
+  
+  const laForme=document.getElementById("laForme")
+  laForme.addEventListener("submit", AddAction)
+
+*/
+</script>
+
+
+
 {% endblock %}
-
-
 
 
 

@@ -16,6 +16,9 @@ from actions.utils import notify
 from django.core.cache import cache
 from django.contrib import messages
 
+from api.serializers import ProductSerializer
+
+
 
 
 class OwnerMixin(object):
@@ -84,18 +87,19 @@ def ProductView(request, id):
     product=get_object_or_404(Product, id=id)
     if type(product.owner)==Store:
         cart_product_form=CartAddProductForm(request.POST)
+        store=get_object_or_404(Store, id=product.owner.id)
+        cart_id=str(request.user)+str(product.owner.id)
         context={
             'cart_product_form':cart_product_form,
             'product':product,
-            'store_id':product.owner.id
+            'store_id':product.owner.id,
+            'store':store,
+            'cart_id':cart_id
         }
+        
         if cart_product_form.is_valid():
-            print('life is')
             
             cd=cart_product_form.cleaned_data
-            
-            cart_id=str(request.user)+str(product.owner.id)
-
             cart=Cart(request, cart_id)
 
             cart.add(product=product, 
@@ -117,7 +121,7 @@ def ProductView(request, id):
 
 
 #comment about the product
-#
+@login_required
 def like_product(request, product_id):
     product=get_object_or_404(Product, id=product_id)
     if request.user in product.likes.all():
@@ -128,6 +132,31 @@ def like_product(request, product_id):
         notify(user=request.user, verb='a aime votre article', target=product.owner)
         print('notification sent')
     return redirect('products:view_product', id=product_id)
+
+
+@login_required
+def like_product_by_api(request, *args, **kwargs):
+    serializer=ProductSerializer(data=request.POST)
+    if serializer.is_valid(raise_exception=True):
+        data=serializer.validated_data
+        product_id=data.get("id")
+        product=get_object_or_404(Product, id=product_id)
+        if request.user in product.likes.all():
+            product.likes.remove(request.user)
+            serializer=ProductSerializer(product)
+            print('arcticle disliked')
+            return Response({serializer.data}, status=200)
+            
+        else:
+            product.likes.add(request.user)
+            print('article liked')
+            serializer=ProductSerializer(product)
+            notify(user=request.user, verb='a aime votre article', target=product.owner)
+            
+            return Response({serializer.data}, status=200)
+    return Response({}, status=200)
+
+
 
 @login_required
 def products_liked(request):

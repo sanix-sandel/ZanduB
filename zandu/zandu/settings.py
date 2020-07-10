@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'groups.apps.GroupsConfig',
     'orders.apps.OrdersConfig',
     'products.apps.ProductsConfig',
+    'taggit',
     'stores.apps.StoresConfig',
     'actions.apps.ActionsConfig',
     'searching.apps.SearchingConfig',
