@@ -133,12 +133,14 @@ def like_product(request, product_id):
         print('notification sent')
     return redirect('products:view_product', id=product_id)
 
+def all_stars(request):
+    return render(request, 'products/components/products_slider.html')
 
 @login_required
 def like_product_by_api(request, *args, **kwargs):
-    serializer=ProductSerializer(data=request.data)
+    serializer=ProductSerializer(data=request.POST)
     if serializer.is_valid(raise_exception=True):
-        
+        data=serializer.validated_data
         product_id=data.get("id")
         product=get_object_or_404(Product, id=product_id)
         if request.user in product.likes.all():

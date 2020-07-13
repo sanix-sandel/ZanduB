@@ -25,11 +25,11 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    category=CategorySerializer()
+  #  category=CategorySerializer()
   #  likes=UserSerializer()
     class Meta:
         model=Product
-        fields='__all__'
+        fields=('id',)#'__all__'
 
 
 
