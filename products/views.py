@@ -60,12 +60,17 @@ class UpdateProduct(LoginRequiredMixin, OwnerMixin, UpdateView):
 
 
 def Home(request):
+    from stores.models import Store
     products=cache.get('all_products')
-    if not products:
+    stores=cache.get('all_stores')
+    if not (products or stores):
         products=Product.objects.all()
+        stores=Store.objects.all()
         cache.set('all_products', products)
+        cache.set('all_stores', stores)
     context={
         'products':products,
+        'stores':stores
     }
     return render(request, 'products/home.html', context)
 

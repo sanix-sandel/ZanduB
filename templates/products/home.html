@@ -5,15 +5,16 @@
    
 <div class="container">
 
-  {% include "./components/products_slider.html" %}
-  <h4>Bootstrap 4 and CCS3 Product Cards with Transition - Techhowdy(demonguru18) - Lyoid Lopes</h4>
+  {% include "./components/stores_slider.html" with stores=stores%}
+ 
+  <!--<h4>Bootstrap 4 and CCS3 Product Cards with Transition - Techhowdy(demonguru18) - Lyoid Lopes</h4>-->
 <br>
 </div>
 
 <div class="row" id="ads">
   <!-- Category Card -->
   {% for product in products %}
-  <div class="entry" id='{{product.id}}'>
+  <div class="col-md-4" id='{{product.id}}'>
       <div class="card rounded">
           <div class="card-image">
               
