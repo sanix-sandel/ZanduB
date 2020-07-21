@@ -16,7 +16,7 @@ from actions.utils import notify
 from django.core.cache import cache
 from django.contrib import messages
 
-from api.serializers import ProductSerializer
+from products.serializers import ProductSerializer
 
 
 
