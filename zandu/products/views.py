@@ -16,7 +16,7 @@ from actions.utils import notify
 from django.core.cache import cache
 from django.contrib import messages
 
-from api.serializers import ProductSerializer
+from products.serializers import ProductSerializer
 
 
 
@@ -60,12 +60,17 @@ class UpdateProduct(LoginRequiredMixin, OwnerMixin, UpdateView):
 
 
 def Home(request):
+    from stores.models import Store
     products=cache.get('all_products')
-    if not products:
+    stores=cache.get('all_stores')
+    if not (products or stores):
         products=Product.objects.all()
+        stores=Store.objects.all()
         cache.set('all_products', products)
+        cache.set('all_stores', stores)
     context={
         'products':products,
+        'stores':stores
     }
     return render(request, 'products/home.html', context)
 
@@ -133,6 +138,8 @@ def like_product(request, product_id):
         print('notification sent')
     return redirect('products:view_product', id=product_id)
 
+def all_stars(request):
+    return render(request, 'products/components/products_slider.html')
 
 @login_required
 def like_product_by_api(request, *args, **kwargs):

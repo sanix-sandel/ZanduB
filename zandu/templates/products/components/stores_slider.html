@@ -1,0 +1,168 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+<title>CodePen - Css Only Carousel</title>
+<style>
+      @import url("https://fonts.googleapis.com/css?family=Muli:400,700&display=swap");
+
+.all-stars-body {
+  margin: 1;
+  height: calc(50vh - 4em);
+  font-family: "Muli", sans-serif;
+  background-color: #f9f9f9;
+}
+
+h1 {
+  text-align: center;
+  margin: 1.5em;
+}
+
+.img-ill {
+  width: 35%;
+  border-radius: 50%;
+}
+
+.container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.items {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  animation: carouselAnim 50s infinite alternate linear;
+}
+
+.entry {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  width: 300px;
+  background: #fff;
+  margin: 1em;
+  padding: 0.5em;
+  border-radius: 10px;
+  box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+@media only screen and (max-width: 384px) {
+  .items {
+    animation: carouselAnim 5s infinite alternate linear;
+  }
+  
+  @keyframes carouselAnim {
+    from {
+      transform: translate(0, 0);
+    }
+    to {
+      transform: translate(calc(-100% + (2 * 300px)));
+    }
+  }
+}
+
+.entry p {
+  text-align: center;
+  padding: 1em;
+}
+
+.name {
+  font-weight: bold;
+}
+
+@keyframes carouselAnim {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(calc(-100% + (5 * 300px)));
+  }
+}
+
+.container .faders {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+}
+
+.faders .right,
+.faders .left {
+  background: linear-gradient(
+    to right,
+    rgba(245, 245, 245, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  width: 15%;
+  height: 100%;
+  position: absolute;
+  z-index: 200;
+}
+
+.right {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    rgba(245, 245, 245, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+.quote{
+    color:red;
+}
+    </style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<div class="all-stars-body" translate="no">
+<h1>All Stars Stores</h1>
+<div class="container">
+    <div class="faders">
+        <div class="left"></div>
+        <div class="right"></div>
+</div>
+<div class="items">
+  <P>ALL STARS STORES 5<i class="fa fa-star" aria-hidden="true"></i>
+  </P>
+{% for store in stores %} 
+
+<div class="entry">
+<p class="name">{{store.title}}</p>
+<img class="img-ill" src="{{store.cover_image.url}}"/>
+<p class="quote">"{{store.slogan}}"</p>
+<p><a class="ad-btn" href="{% url 'stores:view_store' id=store.id %}">
+  <span class="badge badge-primary">Check out !</span></a>
+  <span class="badge badge-primary">Follow</span></a>
+</p>
+
+
+</div>
+{% endfor %}
+<!--<div class="entry">
+<p class="name">John Doe</p>
+
+<p class="quote">"Man, I think this app freaking rocks and stuff. Dude."</p>
+</div>
+-->
+
+</div>
+</div>
+</div>
+</html>

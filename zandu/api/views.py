@@ -1,8 +1,12 @@
 from django.contrib.auth import get_user_model
-from .serializers import *
+#from .serializers import *
 from products.models import *
 from stores.models import *
 
+from accounts.serializers import*
+from orders.serializers import*
+from products.serializers import*
+from stores.serializers import*
 
 from rest_framework import generics, permissions
 

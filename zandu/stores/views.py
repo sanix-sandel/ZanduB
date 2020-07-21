@@ -33,6 +33,7 @@ def CreateStore(request):
             store.owner=request.user
             store.save()
             request.session['store_id']=store.id#store middleware
+            print("Where is it ?")#just down
             return redirect('stores:view_store', id=store.id)
     else:
         form=StoreForm()

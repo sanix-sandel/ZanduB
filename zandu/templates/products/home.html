@@ -4,9 +4,13 @@
 
    
 <div class="container">
-  <br>
-  <h4>Bootstrap 4 and CCS3 Product Cards with Transition - Techhowdy(demonguru18) - Lyoid Lopes</h4>
+
+  {% include "./components/stores_slider.html" with stores=stores%}
+ 
+  <!--<h4>Bootstrap 4 and CCS3 Product Cards with Transition - Techhowdy(demonguru18) - Lyoid Lopes</h4>-->
 <br>
+</div>
+
 <div class="row" id="ads">
   <!-- Category Card -->
   {% for product in products %}
@@ -58,11 +62,12 @@
         }
     }
     return cookieValue;
-}
+  }
 
   function Like(id){
     console.log(id)
     const url=`product/like/${id}`
+    console.log(url)
     const method='POST'
 
     const data=JSON.stringify({
