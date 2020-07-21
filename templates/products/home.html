@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %
+{% block content %}
+
+   
+<div class="container">
+
+  {% include "./components/stores_slider.html" with stores=stores%}
+ 
+  <!--<h4>Bootstrap 4 and CCS3 Product Cards with Transition - Techhowdy(demonguru18) - Lyoid Lopes</h4>-->
+<br>
+</div>
+
+<div class="row" id="ads">
+  <!-- Category Card -->
+  {% for product in products %}
+  <div class="col-md-4" id='{{product.id}}'>
+      <div class="card rounded">
+          <div class="card-image">
+              
+    
+              <img class="img-fluid" src="{{product.font_image.url}}" alt="Alternate Text" />
+          </div>
+          <div class="card-image-overlay m-auto">
+              <!--<span class="card-detail-badge">Used</span>-->
+              <span class="card-detail-badge">{{product.price}} F CFA</span>
+              <!--<span class="card-detail-badge">13000 Kms</span>-->
+          </div>
+          <div class="card-body text-center">
+              <div class="ad-title m-auto">
+                  <h5>{{product.title}}</h5>
+              </div>
+              <a class="ad-btn" href="{% url 'products:view_product' id=product.id %}">
+                <span class="badge badge-primary">View</span>
+              </a>
+              
+              <a class="ad-btn" href="{% url 'products:like_product' product_id=product.id %}">
+                <span onclick="Like('{{product.id}}')" class="badge badge-primary">Like</span>
+              </a>   
+                  
+              </p>
+          </div>
+      </div>
+  </div>
+  {% endfor %}
+
+
+</div>
+</div>
+<script>
+  function getCookie(name) {//Pour le CSRF
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+  }
+
+  function Like(id){
+    console.log(id)
+    const url=`product/like/${id}`
+    console.log(url)
+    const method='POST'
+
+    const data=JSON.stringify({
+      id:id
+    })
+    xhr=new XMLHttpRequest()
+    const csrftoken=getCookie('csrftoken');
+    xhr.open(method, url)
+    xhr.setRequestHeader("Content-Type", "application/json")
+    xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")//Django Ajax
+    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")//Django Ajax
+    xhr.setRequestHeader("X-CSRFToken", csrftoken)
+    console.log(data)
+    xhr.send(data)
+
+  }
+</script>
+
+{% endblock %}
